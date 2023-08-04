@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Source Code\\ProjectMomoDonation\\ProjectMomoDonation.Core\\ProjectMomoDonation.Core.csproj": {}
+    "C:\\Users\\G3\\Documents\\GitHub\\ProjectMomoDonation\\ProjectMomoDonation.Core\\ProjectMomoDonation.Core.csproj": {}
   },
   "projects": {
-    "D:\\Source Code\\ProjectMomoDonation\\ProjectMomoDonation.Core\\ProjectMomoDonation.Core.csproj": {
+    "C:\\Users\\G3\\Documents\\GitHub\\ProjectMomoDonation\\ProjectMomoDonation.Core\\ProjectMomoDonation.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Source Code\\ProjectMomoDonation\\ProjectMomoDonation.Core\\ProjectMomoDonation.Core.csproj",
+        "projectUniqueName": "C:\\Users\\G3\\Documents\\GitHub\\ProjectMomoDonation\\ProjectMomoDonation.Core\\ProjectMomoDonation.Core.csproj",
         "projectName": "ProjectMomoDonation.Core",
-        "projectPath": "D:\\Source Code\\ProjectMomoDonation\\ProjectMomoDonation.Core\\ProjectMomoDonation.Core.csproj",
-        "packagesPath": "C:\\Users\\DangHoc\\.nuget\\packages\\",
-        "outputPath": "D:\\Source Code\\ProjectMomoDonation\\ProjectMomoDonation.Core\\obj\\",
+        "projectPath": "C:\\Users\\G3\\Documents\\GitHub\\ProjectMomoDonation\\ProjectMomoDonation.Core\\ProjectMomoDonation.Core.csproj",
+        "packagesPath": "C:\\Users\\G3\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\G3\\Documents\\GitHub\\ProjectMomoDonation\\ProjectMomoDonation.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\DangHoc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\G3\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
