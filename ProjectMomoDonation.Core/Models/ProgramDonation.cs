@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectMomoDonation.Core.Models
+﻿namespace ProjectMomoDonation.Core.Models
 {
     public enum Status
     {
-
     }
+
     public class ProgramDonation
     {
         public int Id { get; set; }
@@ -24,7 +18,7 @@ namespace ProjectMomoDonation.Core.Models
         public int CategoryId { get; set; }
         public int OrganaziFundraiseId { get; set; }
         public virtual Category Category { get; set; }
-        public virtual OrganaziFundraise OrganaziFundraise { get; set; }
+        public virtual OrganizationFundraise OrganaziFundraise { get; set; }
         public virtual ICollection<DonateHistory> DonateHistorys { get; set; }
     }
 }

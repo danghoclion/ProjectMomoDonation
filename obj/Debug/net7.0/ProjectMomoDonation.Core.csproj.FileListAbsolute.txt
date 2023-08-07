@@ -1,0 +1,14 @@
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\obj\Debug\net7.0\ProjectMomoDonation.Core.csproj.AssemblyReference.cache
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\obj\Debug\net7.0\ProjectMomoDonation.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\obj\Debug\net7.0\ProjectMomoDonation.Core.AssemblyInfoInputs.cache
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\obj\Debug\net7.0\ProjectMomoDonation.Core.AssemblyInfo.cs
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\obj\Debug\net7.0\ProjectMomoDonation.Core.csproj.CoreCompileInputs.cache
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\bin\Debug\net7.0\ProjectMomoDonation.Core.deps.json
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\bin\Debug\net7.0\ProjectMomoDonation.Core.runtimeconfig.json
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\bin\Debug\net7.0\ProjectMomoDonation.Core.dll
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\bin\Debug\net7.0\ProjectMomoDonation.Core.pdb
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\obj\Debug\net7.0\ProjectMomoDonation.Core.dll
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\obj\Debug\net7.0\refint\ProjectMomoDonation.Core.dll
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\obj\Debug\net7.0\ProjectMomoDonation.Core.pdb
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\obj\Debug\net7.0\ProjectMomoDonation.Core.genruntimeconfig.cache
+C:\Users\G3\Documents\GitHub\ProjectMomoDonation\obj\Debug\net7.0\ref\ProjectMomoDonation.Core.dll

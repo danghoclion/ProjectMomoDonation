@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "96bYlFw+MiTEAFUH5y3pal1APFqFF8nsg4fCefVzGA8kzQgVSZypEcnXHm8CG/0Pcob4elmlcRIoN2IeXZGQCg==",
+  "dgSpecHash": "sG81FDd2uKyjbIoltr2x1wXQvWcqY5DddsRlNUcaWzpAU+LR7QocduQaeyThBaC4ZHF7Xd3k0cdjHd4S7IXVkw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\G3\\Desktop\\ProjectMomoDonation\\ProjectMomoDonation.Core.csproj",
+  "projectFilePath": "C:\\Users\\G3\\Documents\\GitHub\\ProjectMomoDonation\\ProjectMomoDonation.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\G3\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\G3\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

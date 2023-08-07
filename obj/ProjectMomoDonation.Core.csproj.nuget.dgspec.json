@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\G3\\Desktop\\ProjectMomoDonation\\ProjectMomoDonation.Core.csproj": {}
+    "C:\\Users\\G3\\Documents\\GitHub\\ProjectMomoDonation\\ProjectMomoDonation.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\G3\\Desktop\\ProjectMomoDonation\\ProjectMomoDonation.Core.csproj": {
+    "C:\\Users\\G3\\Documents\\GitHub\\ProjectMomoDonation\\ProjectMomoDonation.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\G3\\Desktop\\ProjectMomoDonation\\ProjectMomoDonation.Core.csproj",
+        "projectUniqueName": "C:\\Users\\G3\\Documents\\GitHub\\ProjectMomoDonation\\ProjectMomoDonation.Core.csproj",
         "projectName": "ProjectMomoDonation.Core",
-        "projectPath": "C:\\Users\\G3\\Desktop\\ProjectMomoDonation\\ProjectMomoDonation.Core.csproj",
+        "projectPath": "C:\\Users\\G3\\Documents\\GitHub\\ProjectMomoDonation\\ProjectMomoDonation.Core.csproj",
         "packagesPath": "C:\\Users\\G3\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\G3\\Desktop\\ProjectMomoDonation\\obj\\",
+        "outputPath": "C:\\Users\\G3\\Documents\\GitHub\\ProjectMomoDonation\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\G3\\AppData\\Roaming\\NuGet\\NuGet.Config",
