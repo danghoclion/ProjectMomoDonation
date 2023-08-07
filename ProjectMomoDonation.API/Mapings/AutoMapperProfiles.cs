@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using MobileShop.API.DTO;
-using MobileShop.Core.Models;
 
 namespace MobileShop.API.Mapings
 {
@@ -8,7 +6,6 @@ namespace MobileShop.API.Mapings
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Category, CategoryDTO>().ReverseMap();
         }
     }
 }

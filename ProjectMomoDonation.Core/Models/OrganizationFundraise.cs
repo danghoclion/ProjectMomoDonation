@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectMomoDonation.Core.Models
 {
-    public class OrganaziFundraise
+    public class OrganizationFundraise
     {
         public int OrganaziFundraiseId { get; set; }
         public string Name { get; set; }
