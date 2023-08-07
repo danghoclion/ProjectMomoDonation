@@ -24,7 +24,7 @@ namespace ProjectMomoDonation.Core.Models
         public int CategoryId { get; set; }
         public int OrganaziFundraiseId { get; set; }
         public virtual Category Category { get; set; }
-        public virtual OrganaziFundraise OrganaziFundraise { get; set; }
+        public virtual OrganizationFundraise OrganaziFundraise { get; set; }
         public virtual ICollection<DonateHistory> DonateHistorys { get; set; }
     }
 }

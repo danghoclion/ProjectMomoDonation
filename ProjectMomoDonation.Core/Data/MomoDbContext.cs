@@ -15,7 +15,7 @@ namespace ProjectMomoDonation.Core.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<DonateHistory> DonateHistorys { get; set; }
         public DbSet<MomoUser> MomoUsers { get; set; }
-        public DbSet<OrganaziFundraise> OrganaziFundraise { get;set; }
+        public DbSet<OrganizationFundraise> OrganaziFundraise { get;set; }
         public DbSet<ProgramDonation> ProgramDonations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
