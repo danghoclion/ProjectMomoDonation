@@ -17,7 +17,7 @@ namespace ProjectMomoDonation.Core.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.1")
+                .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -267,13 +267,13 @@ namespace ProjectMomoDonation.Core.Migrations
                     b.ToTable("DonateHistorys");
                 });
 
-            modelBuilder.Entity("ProjectMomoDonation.Core.Models.OrganaziFundraise", b =>
+            modelBuilder.Entity("ProjectMomoDonation.Core.Models.OrganizationFundraise", b =>
                 {
-                    b.Property<int>("OrganaziFundraiseId")
+                    b.Property<int>("OrganizationFundraiseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrganaziFundraiseId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrganizationFundraiseId"));
 
                     b.Property<string>("Avatar")
                         .IsRequired()
@@ -295,7 +295,7 @@ namespace ProjectMomoDonation.Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("OrganaziFundraiseId");
+                    b.HasKey("OrganizationFundraiseId");
 
                     b.ToTable("OrganaziFundraise");
                 });
@@ -320,7 +320,7 @@ namespace ProjectMomoDonation.Core.Migrations
                     b.Property<decimal>("DonationGoal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("OrganaziFundraiseId")
+                    b.Property<int>("OrganizationFundraiseId")
                         .HasColumnType("int");
 
                     b.Property<string>("ShortTitle")
@@ -346,7 +346,7 @@ namespace ProjectMomoDonation.Core.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("OrganaziFundraiseId");
+                    b.HasIndex("OrganizationFundraiseId");
 
                     b.ToTable("ProgramDonations");
                 });
@@ -440,15 +440,15 @@ namespace ProjectMomoDonation.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProjectMomoDonation.Core.Models.OrganaziFundraise", "OrganaziFundraise")
+                    b.HasOne("ProjectMomoDonation.Core.Models.OrganizationFundraise", "OrganizationFundraise")
                         .WithMany("ProgramDonations")
-                        .HasForeignKey("OrganaziFundraiseId")
+                        .HasForeignKey("OrganizationFundraiseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
 
-                    b.Navigation("OrganaziFundraise");
+                    b.Navigation("OrganizationFundraise");
                 });
 
             modelBuilder.Entity("ProjectMomoDonation.Core.Models.Category", b =>
@@ -456,7 +456,7 @@ namespace ProjectMomoDonation.Core.Migrations
                     b.Navigation("ProgramDonations");
                 });
 
-            modelBuilder.Entity("ProjectMomoDonation.Core.Models.OrganaziFundraise", b =>
+            modelBuilder.Entity("ProjectMomoDonation.Core.Models.OrganizationFundraise", b =>
                 {
                     b.Navigation("ProgramDonations");
                 });

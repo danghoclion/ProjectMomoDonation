@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectMomoDonation.Core.Models
+﻿namespace ProjectMomoDonation.API.DTO
 {
-    public enum Status
+    public class ProgramDonateDTO
     {
-
-    }
-    public class ProgramDonation
-    {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string ShortTitle { get; set; }
         public string Story { get; set; }
@@ -23,8 +12,5 @@ namespace ProjectMomoDonation.Core.Models
         public string Status { get; set; }
         public int CategoryId { get; set; }
         public int OrganizationFundraiseId { get; set; }
-        public virtual Category? Category { get; set; }
-        public virtual OrganizationFundraise? OrganizationFundraise { get; set; }
-        public virtual ICollection<DonateHistory>? DonateHistorys { get; set; }
     }
 }

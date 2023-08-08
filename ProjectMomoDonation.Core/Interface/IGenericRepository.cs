@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMomoDoanation.Repository.Interface
+namespace ProjectMomoDoanation.Core.Interface
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {

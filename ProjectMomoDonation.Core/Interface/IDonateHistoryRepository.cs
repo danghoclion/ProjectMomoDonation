@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMomoDoanation.Repository.Interface
+namespace ProjectMomoDoanation.Core.Interface
 {
     public interface IDonateHistoryRepository : IGenericRepository<DonateHistory>
     {

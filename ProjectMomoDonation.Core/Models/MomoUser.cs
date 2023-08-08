@@ -11,7 +11,7 @@ namespace ProjectMomoDonation.Core.Models
     {
         public string Status { get; set; }
 
-        public virtual ICollection<DonateHistory> DonateHistorys { get; set; }
+        public virtual ICollection<DonateHistory>? DonateHistorys { get; set; }
 
     }
 }

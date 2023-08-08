@@ -70,7 +70,7 @@ namespace ProjectMomoDonation.Core.Migrations
                 name: "OrganaziFundraise",
                 columns: table => new
                 {
-                    OrganaziFundraiseId = table.Column<int>(type: "int", nullable: false)
+                    OrganizationFundraiseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShortName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -80,7 +80,7 @@ namespace ProjectMomoDonation.Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrganaziFundraise", x => x.OrganaziFundraiseId);
+                    table.PrimaryKey("PK_OrganaziFundraise", x => x.OrganizationFundraiseId);
                 });
 
             migrationBuilder.CreateTable(
@@ -204,7 +204,7 @@ namespace ProjectMomoDonation.Core.Migrations
                     DonationGoal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    OrganaziFundraiseId = table.Column<int>(type: "int", nullable: false)
+                    OrganizationFundraiseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -216,10 +216,10 @@ namespace ProjectMomoDonation.Core.Migrations
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProgramDonations_OrganaziFundraise_OrganaziFundraiseId",
-                        column: x => x.OrganaziFundraiseId,
+                        name: "FK_ProgramDonations_OrganaziFundraise_OrganizationFundraiseId",
+                        column: x => x.OrganizationFundraiseId,
                         principalTable: "OrganaziFundraise",
-                        principalColumn: "OrganaziFundraiseId",
+                        principalColumn: "OrganizationFundraiseId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -228,7 +228,8 @@ namespace ProjectMomoDonation.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProgramDonationId = table.Column<int>(type: "int", nullable: false)
+                    ProgramDonationId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -297,9 +298,9 @@ namespace ProjectMomoDonation.Core.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProgramDonations_OrganaziFundraiseId",
+                name: "IX_ProgramDonations_OrganizationFundraiseId",
                 table: "ProgramDonations",
-                column: "OrganaziFundraiseId");
+                column: "OrganizationFundraiseId");
         }
 
         /// <inheritdoc />

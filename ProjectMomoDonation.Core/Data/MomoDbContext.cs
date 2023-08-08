@@ -18,6 +18,14 @@ namespace ProjectMomoDonation.Core.Data
         public DbSet<OrganizationFundraise> OrganaziFundraise { get;set; }
         public DbSet<ProgramDonation> ProgramDonations { get; set; }
 
+        public MomoDbContext()
+        {
+        }
+
+        public MomoDbContext(DbContextOptions options) : base(options)
+        {
+
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=DANGHOCPC;Database=MomoDatabase;Trusted_Connection=True;MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True;");

@@ -4,19 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMomoDoanation.Repository.Interface
+namespace ProjectMomoDoanation.Core.Interface
 {
     public interface IUnitOfWork : IDisposable
     {
-        ICategoryRepository Category { get; }
+        ICategoryRepository CategoryRepository { get; }
 
-        IDonateHistoryRepository DonateHistory { get; }
+        IDonateHistoryRepository DonateHistoryRepository { get; }
 
-        IMomoUserRepository MomoUser { get; }
+        IMomoUserRepository MomoUserRepository { get; }
         IOrganazationFundraiseRepository OrganazationFundraise { get; }
 
         IProgramDonationRepository ProgramDonation { get; }
 
-        int Save();
+        int SaveChange();
+        Task<int> SaveChangeAsync();
     }
 }

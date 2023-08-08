@@ -12,6 +12,6 @@ namespace ProjectMomoDonation.Core.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<ProgramDonation> ProgramDonations { get; set; }
+        public virtual ICollection<ProgramDonation>? ProgramDonations { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace MobileShop.API.ValidateHelper
+namespace ProjectMomoDonation.API.ValidateHelper
 {
     public class ValidateModelAttribute : ActionFilterAttribute
     {

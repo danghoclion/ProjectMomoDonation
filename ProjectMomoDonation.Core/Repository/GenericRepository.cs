@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjectMomoDoanation.Repository.Interface;
+using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.Core.Data;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMomoDoanation.Repository.Repository
+namespace ProjectMomoDoanation.Core.Repository
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
@@ -51,7 +51,8 @@ namespace ProjectMomoDoanation.Repository.Repository
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            context.Update(entities);
+            //context.Set<TEntity>().Update(entity);
+            this.context.Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();
             return entity;
         }
