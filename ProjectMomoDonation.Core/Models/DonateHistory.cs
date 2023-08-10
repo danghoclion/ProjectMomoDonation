@@ -13,6 +13,6 @@ namespace ProjectMomoDonation.Core.Models
         public decimal Amount { get; set; }
 
         public virtual ProgramDonation? ProgramDonation { get; set; }
-        public virtual RegisterRequestDTO? MomoUser { get; set; }
+        public virtual MomoUser? MomoUser { get; set; }
     }
 }

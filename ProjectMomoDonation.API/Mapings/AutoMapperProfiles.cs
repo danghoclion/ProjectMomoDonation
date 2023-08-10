@@ -12,7 +12,7 @@ namespace ProjectMomoDonation.API.Mapings
             CreateMap<OrganizationFundraise, OrganazationFundraiseDTO>().ReverseMap();
             CreateMap<DonateHistory, DonateHistoryDTO>().ReverseMap();
             CreateMap<ProgramDonation, ProgramDonateDTO>().ReverseMap();
-            CreateMap<Core.Models.RegisterRequestDTO, UserDTO>().ReverseMap();
+            CreateMap<Core.Models.MomoUser, UserDTO>().ReverseMap();
         }
     }
 }

@@ -14,72 +14,72 @@ namespace ProjectMomoDonation.API.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        private readonly RoleManager<IdentityRole> roleManager;
+        //private readonly RoleManager<IdentityRole> roleManager;
 
-        private readonly IMapper mapper;
+        //private readonly IMapper mapper;
 
-        public RoleController(RoleManager<IdentityRole> roleManager, IMapper mapper)
-        {
-            this.roleManager = roleManager;
-            this.mapper = mapper;
-        }
+        //public RoleController(RoleManager<IdentityRole> roleManager, IMapper mapper)
+        //{
+        //    this.roleManager = roleManager;
+        //    this.mapper = mapper;
+        //}
 
-        [HttpGet]
-        public async Task<IActionResult> GetALL()
-        {
-            var roles = await roleManager.Roles.ToListAsync();
-            return Ok(roles);
-        }
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var role = await unitOfWork.CategoryRepository.GetByIdAsync(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-            return Ok(mapper.Map<CategoryDTO>(category));
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetALL()
+        //{
+        //    var roles = await roleManager.Roles.ToListAsync();
+        //    return Ok(roles);
+        //}
+        //[HttpGet]
+        //[Route("{id}")]
+        //public async Task<IActionResult> GetById(int id)
+        //{
+        //    var role = await unitOfWork.CategoryRepository.GetByIdAsync(id);
+        //    if (category == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(mapper.Map<CategoryDTO>(category));
+        //}
 
-        [HttpPost]
-        [ValidateModel]
-        public async Task<IActionResult> Create([FromBody] CategoryDTO categoryDTO)
-        {
-            var category = mapper.Map<Category>(categoryDTO);
-            var newCategory = await unitOfWork.CategoryRepository.CreateAsync(category);
+        //[HttpPost]
+        //[ValidateModel]
+        //public async Task<IActionResult> Create([FromBody] CategoryDTO categoryDTO)
+        //{
+        //    var category = mapper.Map<Category>(categoryDTO);
+        //    var newCategory = await unitOfWork.CategoryRepository.CreateAsync(category);
 
-            if (newCategory == null)
-            {
-                return NotFound();
-            }
+        //    if (newCategory == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(newCategory);
-        }
+        //    return Ok(newCategory);
+        //}
 
-        [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] CategoryDTO categoryDTO)
-        {
-            var category = mapper.Map<Category>(categoryDTO);
-            category.CategoryId = id;
-            var updateCategory = await unitOfWork.CategoryRepository.UpdateAsync(category);
+        //[HttpPut]
+        //[Route("{id}")]
+        //public async Task<IActionResult> Update(int id, [FromBody] CategoryDTO categoryDTO)
+        //{
+        //    var category = mapper.Map<Category>(categoryDTO);
+        //    category.CategoryId = id;
+        //    var updateCategory = await unitOfWork.CategoryRepository.UpdateAsync(category);
 
-            if (updateCategory == null)
-                return NotFound();
-            return Ok(mapper.Map<CategoryDTO>(updateCategory));
-        }
+        //    if (updateCategory == null)
+        //        return NotFound();
+        //    return Ok(mapper.Map<CategoryDTO>(updateCategory));
+        //}
 
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
-        {
+        //[HttpDelete]
+        //[Route("{id}")]
+        //public async Task<IActionResult> Delete([FromRoute] int id)
+        //{
 
-            var deleteCategory = await unitOfWork.CategoryRepository.GetByIdAsync(id);
-            if (deleteCategory == null)
-                return NotFound();
-            await unitOfWork.CategoryRepository.Deletesync(deleteCategory);
-            return Ok(mapper.Map<CategoryDTO>(deleteCategory));
-        }
+        //    var deleteCategory = await unitOfWork.CategoryRepository.GetByIdAsync(id);
+        //    if (deleteCategory == null)
+        //        return NotFound();
+        //    await unitOfWork.CategoryRepository.Deletesync(deleteCategory);
+        //    return Ok(mapper.Map<CategoryDTO>(deleteCategory));
+        //}
     }
 }

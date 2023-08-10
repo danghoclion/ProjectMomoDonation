@@ -15,13 +15,8 @@ namespace ProjectMomoDonation.Core.Data
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<DonateHistory> DonateHistorys { get; set; }
-<<<<<<< HEAD
-        public DbSet<RegisterRequestDTO> MomoUsers { get; set; }
-        public DbSet<OrganizationFundraise> OrganaziFundraise { get;set; }
-=======
         public DbSet<MomoUser> MomoUsers { get; set; }
         public DbSet<OrganizationFundraise> OrganazationFundraise { get; set; }
->>>>>>> dc1b3091c2d770521ee1c4f12300843664f68716
         public DbSet<ProgramDonation> ProgramDonations { get; set; }
 
         public MomoDbContext()
