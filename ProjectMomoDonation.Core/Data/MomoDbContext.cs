@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ProjectMomoDonation.Core.Data.SeedData;
 using ProjectMomoDonation.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace ProjectMomoDonation.Core.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<DonateHistory> DonateHistorys { get; set; }
         public DbSet<MomoUser> MomoUsers { get; set; }
-        public DbSet<OrganizationFundraise> OrganaziFundraise { get;set; }
+        public DbSet<OrganizationFundraise> OrganazationFundraise { get; set; }
         public DbSet<ProgramDonation> ProgramDonations { get; set; }
 
         public MomoDbContext()
@@ -24,18 +25,21 @@ namespace ProjectMomoDonation.Core.Data
 
         public MomoDbContext(DbContextOptions options) : base(options)
         {
-
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DANGHOCPC;Database=MomoDatabase;Trusted_Connection=True;MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True;");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=DESKTOP-OJ0HV03;Database=MomoDatabase;Trusted_Connection=True;MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            //modelBuilder.Seed();
+            modelBuilder.SeedingData();
         }
     }
 }
