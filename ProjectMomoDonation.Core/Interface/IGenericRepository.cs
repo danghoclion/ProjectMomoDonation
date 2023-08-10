@@ -10,7 +10,7 @@ namespace ProjectMomoDoanation.Core.Interface
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
-        Task<List<TEntity>> GetAllAsync();
+        Task<List<TEntity>> GetAllAsync(string? include = null);
 
         Task<TEntity> GetByIdAsync(int id);
 

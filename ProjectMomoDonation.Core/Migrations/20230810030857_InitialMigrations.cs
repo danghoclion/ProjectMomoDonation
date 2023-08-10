@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectMomoDonation.Core.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDatabase : Migration
+    public partial class InitialMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -288,15 +288,15 @@ namespace ProjectMomoDonation.Core.Migrations
                 columns: new[] { "Id", "AvatarUrl", "CategoryId", "DateEnd", "DateStart", "DonationGoal", "OrganizationFundraiseId", "ShortTitle", "Status", "Story", "Title", "TotalDonate" },
                 values: new object[,]
                 {
-                    { 1, "https://swiperjs.com/demos/images/nature-1.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1610), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1635), 500000m, 1, "Tiltle number 1", "", "Story number 1", "Tiltle long number 1", 50000m },
-                    { 2, "https://swiperjs.com/demos/images/nature-2.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1652), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1652), 500000m, 2, "Tiltle number 2", "", "Story number 2", "Tiltle long number 2", 100000m },
-                    { 3, "https://swiperjs.com/demos/images/nature-3.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1658), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1658), 500000m, 3, "Tiltle number 3", "", "Story number 3", "Tiltle long number 3", 150000m },
-                    { 4, "https://swiperjs.com/demos/images/nature-4.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1664), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1665), 500000m, 4, "Tiltle number 4", "", "Story number 4", "Tiltle long number 4", 200000m },
-                    { 5, "https://swiperjs.com/demos/images/nature-5.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1670), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1671), 500000m, 5, "Tiltle number 5", "", "Story number 5", "Tiltle long number 5", 250000m },
-                    { 6, "https://swiperjs.com/demos/images/nature-6.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1677), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1678), 500000m, 6, "Tiltle number 6", "", "Story number 6", "Tiltle long number 6", 300000m },
-                    { 7, "https://swiperjs.com/demos/images/nature-7.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1683), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1684), 500000m, 7, "Tiltle number 7", "", "Story number 7", "Tiltle long number 7", 350000m },
-                    { 8, "https://swiperjs.com/demos/images/nature-8.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1689), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1690), 500000m, 8, "Tiltle number 8", "", "Story number 8", "Tiltle long number 8", 400000m },
-                    { 9, "https://swiperjs.com/demos/images/nature-9.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1695), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1696), 500000m, 9, "Tiltle number 9", "", "Story number 9", "Tiltle long number 9", 450000m }
+                    { 1, "https://swiperjs.com/demos/images/nature-1.jpg", 1, new DateTime(2023, 9, 29, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8454), new DateTime(2023, 8, 10, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8478), 500000m, 1, "Tiltle number 1", "", "Story number 1", "Tiltle long number 1", 50000m },
+                    { 2, "https://swiperjs.com/demos/images/nature-2.jpg", 1, new DateTime(2023, 9, 29, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8495), new DateTime(2023, 8, 10, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8496), 500000m, 2, "Tiltle number 2", "", "Story number 2", "Tiltle long number 2", 100000m },
+                    { 3, "https://swiperjs.com/demos/images/nature-3.jpg", 1, new DateTime(2023, 9, 29, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8500), new DateTime(2023, 8, 10, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8500), 500000m, 3, "Tiltle number 3", "", "Story number 3", "Tiltle long number 3", 150000m },
+                    { 4, "https://swiperjs.com/demos/images/nature-4.jpg", 1, new DateTime(2023, 9, 29, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8505), new DateTime(2023, 8, 10, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8505), 500000m, 4, "Tiltle number 4", "", "Story number 4", "Tiltle long number 4", 200000m },
+                    { 5, "https://swiperjs.com/demos/images/nature-5.jpg", 1, new DateTime(2023, 9, 29, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8510), new DateTime(2023, 8, 10, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8511), 500000m, 5, "Tiltle number 5", "", "Story number 5", "Tiltle long number 5", 250000m },
+                    { 6, "https://swiperjs.com/demos/images/nature-6.jpg", 1, new DateTime(2023, 9, 29, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8517), new DateTime(2023, 8, 10, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8517), 500000m, 6, "Tiltle number 6", "", "Story number 6", "Tiltle long number 6", 300000m },
+                    { 7, "https://swiperjs.com/demos/images/nature-7.jpg", 1, new DateTime(2023, 9, 29, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8522), new DateTime(2023, 8, 10, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8523), 500000m, 7, "Tiltle number 7", "", "Story number 7", "Tiltle long number 7", 350000m },
+                    { 8, "https://swiperjs.com/demos/images/nature-8.jpg", 1, new DateTime(2023, 9, 29, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8528), new DateTime(2023, 8, 10, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8528), 500000m, 8, "Tiltle number 8", "", "Story number 8", "Tiltle long number 8", 400000m },
+                    { 9, "https://swiperjs.com/demos/images/nature-9.jpg", 1, new DateTime(2023, 9, 29, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8533), new DateTime(2023, 8, 10, 10, 8, 57, 373, DateTimeKind.Local).AddTicks(8534), 500000m, 9, "Tiltle number 9", "", "Story number 9", "Tiltle long number 9", 450000m }
                 });
 
             migrationBuilder.CreateIndex(

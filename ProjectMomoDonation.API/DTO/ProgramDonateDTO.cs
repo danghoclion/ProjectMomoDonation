@@ -10,9 +10,9 @@
         public decimal? TotalDonate { get; set; }
         public decimal DonationGoal { get; set; }
         public string Status { get; set; }
-        public int CategoryName { get; set; }
-        public int OrganizationName { get; set; }
+        public string CategoryName { get; set; }
+        public string OrganizationName { get; set; }
         public string OrganizationAvatar { get; set; }
-        public string CountDonation { get; set;}
+        public int CountDonation { get; set;}
     }
 }

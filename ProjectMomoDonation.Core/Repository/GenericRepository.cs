@@ -32,9 +32,12 @@ namespace ProjectMomoDoanation.Core.Repository
             this.context.SaveChangesAsync();
         }
 
-        public async Task<List<TEntity>> GetAllAsync()
+        public async Task<List<TEntity>> GetAllAsync(string? includes = null)
         {
-            return await entities.ToListAsync();
+            if(includes != null)
+                return await entities.Include(includes).ToListAsync();
+            else
+                return await entities.ToListAsync();
         }
 
         public async Task<TEntity> GetByIdAsync(int id)

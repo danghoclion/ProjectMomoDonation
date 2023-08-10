@@ -5,6 +5,7 @@ using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.API.DTO;
 using ProjectMomoDonation.API.ValidateHelper;
 using ProjectMomoDonation.Core.Models;
+using System.Text.Json;
 
 namespace ProjectMomoDonation.API.Controllers
 {
@@ -25,7 +26,22 @@ namespace ProjectMomoDonation.API.Controllers
         public async Task<IActionResult> GetALL()
         {
             var programs = await unitOfWork.ProgramDonation.GetAllAsync();
-            return Ok(programs);
+            
+            var listResult = mapper.Map<List<ProgramDonateDTO>>(programs);
+            foreach (var item in programs)
+            {
+                var category = await unitOfWork.CategoryRepository.GetByIdAsync(item.CategoryId);
+                var organition = await unitOfWork.OrganazationFundraise.GetByIdAsync(item.OrganizationFundraiseId);
+                var historyDonation = unitOfWork.DonateHistoryRepository.GetByWhereAsync(x => x.ProgramDonationId == item.Id).Count();
+                foreach(var result in listResult)
+                {
+                    result.CategoryName = category.Name;
+                    result.OrganizationName = organition.Name;
+                    result.OrganizationAvatar = organition.Avatar;
+                    result.CountDonation = historyDonation;
+                }
+            }
+            return Ok(listResult);
         }
         [HttpGet]
         [Route("{id}")]
