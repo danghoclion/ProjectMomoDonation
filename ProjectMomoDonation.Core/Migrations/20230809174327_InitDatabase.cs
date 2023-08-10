@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ProjectMomoDonation.Core.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,7 +69,7 @@ namespace ProjectMomoDonation.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrganaziFundraise",
+                name: "OrganazationFundraise",
                 columns: table => new
                 {
                     OrganizationFundraiseId = table.Column<int>(type: "int", nullable: false)
@@ -80,7 +82,7 @@ namespace ProjectMomoDonation.Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrganaziFundraise", x => x.OrganizationFundraiseId);
+                    table.PrimaryKey("PK_OrganazationFundraise", x => x.OrganizationFundraiseId);
                 });
 
             migrationBuilder.CreateTable(
@@ -196,6 +198,7 @@ namespace ProjectMomoDonation.Core.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AvatarUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShortTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Story = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateStart = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -216,9 +219,9 @@ namespace ProjectMomoDonation.Core.Migrations
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProgramDonations_OrganaziFundraise_OrganizationFundraiseId",
+                        name: "FK_ProgramDonations_OrganazationFundraise_OrganizationFundraiseId",
                         column: x => x.OrganizationFundraiseId,
-                        principalTable: "OrganaziFundraise",
+                        principalTable: "OrganazationFundraise",
                         principalColumn: "OrganizationFundraiseId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -246,6 +249,54 @@ namespace ProjectMomoDonation.Core.Migrations
                         principalTable: "ProgramDonations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Description + 1", "Name +1" },
+                    { 2, "Description + 2", "Name +2" },
+                    { 3, "Description + 3", "Name +3" },
+                    { 4, "Description + 4", "Name +4" },
+                    { 5, "Description + 5", "Name +5" },
+                    { 6, "Description + 6", "Name +6" },
+                    { 7, "Description + 7", "Name +7" },
+                    { 8, "Description + 8", "Name +8" },
+                    { 9, "Description + 9", "Name +9" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "OrganazationFundraise",
+                columns: new[] { "OrganizationFundraiseId", "Avatar", "Description", "Image", "Name", "ShortName" },
+                values: new object[,]
+                {
+                    { 1, "", "Description + 1", "Image +1", "Name +1", "Short name +1" },
+                    { 2, "", "Description + 2", "Image +2", "Name +2", "Short name +2" },
+                    { 3, "", "Description + 3", "Image +3", "Name +3", "Short name +3" },
+                    { 4, "", "Description + 4", "Image +4", "Name +4", "Short name +4" },
+                    { 5, "", "Description + 5", "Image +5", "Name +5", "Short name +5" },
+                    { 6, "", "Description + 6", "Image +6", "Name +6", "Short name +6" },
+                    { 7, "", "Description + 7", "Image +7", "Name +7", "Short name +7" },
+                    { 8, "", "Description + 8", "Image +8", "Name +8", "Short name +8" },
+                    { 9, "", "Description + 9", "Image +9", "Name +9", "Short name +9" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProgramDonations",
+                columns: new[] { "Id", "AvatarUrl", "CategoryId", "DateEnd", "DateStart", "DonationGoal", "OrganizationFundraiseId", "ShortTitle", "Status", "Story", "Title", "TotalDonate" },
+                values: new object[,]
+                {
+                    { 1, "https://swiperjs.com/demos/images/nature-1.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1610), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1635), 500000m, 1, "Tiltle number 1", "", "Story number 1", "Tiltle long number 1", 50000m },
+                    { 2, "https://swiperjs.com/demos/images/nature-2.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1652), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1652), 500000m, 2, "Tiltle number 2", "", "Story number 2", "Tiltle long number 2", 100000m },
+                    { 3, "https://swiperjs.com/demos/images/nature-3.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1658), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1658), 500000m, 3, "Tiltle number 3", "", "Story number 3", "Tiltle long number 3", 150000m },
+                    { 4, "https://swiperjs.com/demos/images/nature-4.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1664), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1665), 500000m, 4, "Tiltle number 4", "", "Story number 4", "Tiltle long number 4", 200000m },
+                    { 5, "https://swiperjs.com/demos/images/nature-5.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1670), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1671), 500000m, 5, "Tiltle number 5", "", "Story number 5", "Tiltle long number 5", 250000m },
+                    { 6, "https://swiperjs.com/demos/images/nature-6.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1677), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1678), 500000m, 6, "Tiltle number 6", "", "Story number 6", "Tiltle long number 6", 300000m },
+                    { 7, "https://swiperjs.com/demos/images/nature-7.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1683), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1684), 500000m, 7, "Tiltle number 7", "", "Story number 7", "Tiltle long number 7", 350000m },
+                    { 8, "https://swiperjs.com/demos/images/nature-8.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1689), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1690), 500000m, 8, "Tiltle number 8", "", "Story number 8", "Tiltle long number 8", 400000m },
+                    { 9, "https://swiperjs.com/demos/images/nature-9.jpg", 1, new DateTime(2023, 9, 29, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1695), new DateTime(2023, 8, 10, 0, 43, 27, 633, DateTimeKind.Local).AddTicks(1696), 500000m, 9, "Tiltle number 9", "", "Story number 9", "Tiltle long number 9", 450000m }
                 });
 
             migrationBuilder.CreateIndex(
@@ -337,7 +388,7 @@ namespace ProjectMomoDonation.Core.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "OrganaziFundraise");
+                name: "OrganazationFundraise");
         }
     }
 }

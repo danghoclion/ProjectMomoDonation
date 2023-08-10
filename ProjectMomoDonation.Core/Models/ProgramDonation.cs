@@ -14,6 +14,7 @@ namespace ProjectMomoDonation.Core.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public string AvatarUrl { get; set; }
         public string ShortTitle { get; set; }
         public string Story { get; set; }
         public DateTime DateStart { get; set; }

@@ -95,7 +95,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
@@ -107,7 +106,12 @@ app.UseAuthentication();
 //});
 
 app.UseAuthorization();
-
+app.UseCors(option =>
+{
+    option.AllowAnyHeader();
+    option.AllowAnyMethod();
+    option.AllowAnyOrigin();
+});
 app.MapControllers();
 
 app.Run();
