@@ -43,7 +43,7 @@ namespace ProjectMomoDonation.API.Controllers
         [ValidateModel]
         public async Task<IActionResult> Create([FromBody] UserDTO userDTO)
         {
-            var users = mapper.Map<MomoUser>(userDTO);
+            var users = mapper.Map<Core.Models.RegisterRequestDTO>(userDTO);
             var newusers = await unitOfWork.MomoUserRepository.CreateAsync(users);
 
             if (newusers == null)
@@ -58,7 +58,7 @@ namespace ProjectMomoDonation.API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] UserDTO usersDTO)
         {
-            var users = mapper.Map<MomoUser>(usersDTO);
+            var users = mapper.Map<Core.Models.RegisterRequestDTO>(usersDTO);
             users.Id = id;
             var updateusers = await unitOfWork.MomoUserRepository.UpdateAsync(users);
 

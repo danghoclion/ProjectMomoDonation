@@ -89,7 +89,7 @@ namespace ProjectMomoDonation.API.Controllers
             JObject jmessage = JObject.Parse(responseFromMomo);
 
             //var jsonResult = JsonSerializer.Deserialize<MomoResposeUrl>(jmessage.ToString());
-            return Ok(jmessage);
+            return Ok(responseFromMomo);
         }
     }
 }

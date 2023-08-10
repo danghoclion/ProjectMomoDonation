@@ -12,7 +12,7 @@ namespace ProjectMomoDoanation.Core.Interface
 
         IDonateHistoryRepository DonateHistoryRepository { get; }
 
-        IMomoUserRepository MomoUserRepository { get; }
+        //IMomoUserRepository MomoUserRepository { get; }
         IOrganazationFundraiseRepository OrganazationFundraise { get; }
 
         IProgramDonationRepository ProgramDonation { get; }

@@ -43,8 +43,8 @@ namespace ProjectMomoDonation.API.Controllers
         [ValidateModel]
         public async Task<IActionResult> Create([FromBody] ProgramDonateDTO programDTO)
         {
-            var program = mapper.Map<MomoUser>(programDTO);
-            var newProgram = await unitOfWork.MomoUserRepository.CreateAsync(program);
+            var program = mapper.Map<ProgramDonation>(programDTO);
+            var newProgram = await unitOfWork.ProgramDonation.CreateAsync(program);
 
             if (newProgram == null)
             {

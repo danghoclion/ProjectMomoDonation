@@ -52,6 +52,7 @@ builder.Services.AddDbContext<MomoDbContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("NZWalk")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 builder.Services.AddHttpContextAccessor();

@@ -14,7 +14,7 @@ namespace ProjectMomoDonation.Core.UnitOfWork
         private readonly MomoDbContext context;
         private ICategoryRepository categoryRepository;
         private IDonateHistoryRepository donateHistoryRepository;
-        private IMomoUserRepository momoUserRepository;
+        //private IMomoUserRepository momoUserRepository;
         private IOrganazationFundraiseRepository organazationFundraise;
         private IProgramDonationRepository programDonation;
 
@@ -43,15 +43,15 @@ namespace ProjectMomoDonation.Core.UnitOfWork
                 return donateHistoryRepository;
             }
         }
-        public IMomoUserRepository MomoUserRepository
-        {
-            get
-            {
-                if (momoUserRepository == null)
-                    momoUserRepository = new MomoUserRepository(context);
-                return momoUserRepository;
-            }
-        }
+        //public IMomoUserRepository MomoUserRepository
+        //{
+        //    get
+        //    {
+        //        if (momoUserRepository == null)
+        //            momoUserRepository = new MomoUserRepository(context);
+        //        return momoUserRepository;
+        //    }
+        //}
         public IOrganazationFundraiseRepository OrganazationFundraise
         {
             get
