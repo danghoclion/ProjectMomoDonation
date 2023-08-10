@@ -29,7 +29,7 @@ namespace ProjectMomoDonation.Core.Data.SeedData
                 var item = new OrganizationFundraise()
                 {
                     OrganizationFundraiseId = i,
-                    Avatar = $"",
+                    Avatar = $"https://swiperjs.com/demos/images/nature-{i}.jpg",
                     Description = $"Description + {i}",
                     Name = $"Name +{i}",
                     Image = $"Image +{i}",
