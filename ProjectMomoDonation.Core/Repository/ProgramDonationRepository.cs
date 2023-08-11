@@ -1,4 +1,5 @@
-﻿using ProjectMomoDoanation.Core.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.Core.Data;
 using ProjectMomoDonation.Core.Models;
 using System;
@@ -16,6 +17,18 @@ namespace ProjectMomoDoanation.Core.Repository
 
         public ProgramDonationRepository(MomoDbContext context) : base(context)
         {
+        }
+
+        public async Task<List<ProgramDonation>> GetProgramsByCategory(int? categoryId)
+        {
+            var program = await entities.Where(x => x.CategoryId == categoryId).ToListAsync();
+            return program;
+        }
+
+        public async Task<List<ProgramDonation>> GetProgramsByOrganition(int? id)
+        {
+            var program = await entities.Where(x => x.OrganizationFundraiseId == id).ToListAsync();
+            return program;
         }
     }
 }

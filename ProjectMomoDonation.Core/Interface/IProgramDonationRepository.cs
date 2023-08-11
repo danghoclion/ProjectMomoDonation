@@ -9,5 +9,7 @@ namespace ProjectMomoDoanation.Core.Interface
 {
     public interface IProgramDonationRepository : IGenericRepository<ProgramDonation>
     {
+        Task<List<ProgramDonation>> GetProgramsByCategory(int? categoryId);
+        Task<List<ProgramDonation>> GetProgramsByOrganition(int? id);
     }
 }

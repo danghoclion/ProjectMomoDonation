@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectMomoDonation.Core.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,15 +7,12 @@ using System.Threading.Tasks;
 
 namespace ProjectMomoDonation.Core.Models
 {
-    public enum Status
-    {
-
-    }
     public class ProgramDonation
     {
         public int Id { get; set; }
         public string Title { get; set; }
         public string AvatarUrl { get; set; }
+        public string? UrlSlug { get; set; }
         public string ShortTitle { get; set; }
         public string Story { get; set; }
         public DateTime DateStart { get; set; }

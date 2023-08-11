@@ -23,10 +23,19 @@ namespace ProjectMomoDonation.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetALL()
+        [Route("filter")]
+        public async Task<IActionResult> GetALL([FromQuery] int? categoryId, [FromQuery] int? organitionId)
         {
             var programs = await unitOfWork.ProgramDonation.GetAllAsync();
 
+            if (categoryId != null)
+            {
+                programs = await unitOfWork.ProgramDonation.GetProgramsByCategory(categoryId);
+            }
+            if (organitionId != null)
+            {
+                programs = await unitOfWork.ProgramDonation.GetProgramsByOrganition(organitionId);
+            }
             var listResult = mapper.Map<List<ProgramDonateDTO>>(programs);
             for (int i = 0; i < listResult.Count; i++)
             {
@@ -46,6 +55,17 @@ namespace ProjectMomoDonation.API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var program = await unitOfWork.ProgramDonation.GetByIdAsync(id);
+            if (program == null)
+            {
+                return NotFound();
+            }
+            return Ok(program);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetByUrlSlug([FromQuery] string urlSlug)
+        {
+            var program = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.UrlSlug.Contains(urlSlug));
             if (program == null)
             {
                 return NotFound();

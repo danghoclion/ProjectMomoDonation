@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectMomoDonation.Core.Data;
 
@@ -11,9 +12,11 @@ using ProjectMomoDonation.Core.Data;
 namespace ProjectMomoDonation.Core.Migrations
 {
     [DbContext(typeof(MomoDbContext))]
-    partial class MomoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230811030215_new field")]
+    partial class newfield
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,9 +247,6 @@ namespace ProjectMomoDonation.Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UrlSlug")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
@@ -352,9 +352,6 @@ namespace ProjectMomoDonation.Core.Migrations
 
                     b.Property<string>("ShortName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UrlSlug")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OrganizationFundraiseId");
@@ -491,9 +488,6 @@ namespace ProjectMomoDonation.Core.Migrations
                     b.Property<decimal?>("TotalDonate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("UrlSlug")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -508,8 +502,8 @@ namespace ProjectMomoDonation.Core.Migrations
                             Id = 1,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-1.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 9, 30, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(315),
-                            DateStart = new DateTime(2023, 8, 11, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(334),
+                            DateEnd = new DateTime(2023, 9, 30, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(669),
+                            DateStart = new DateTime(2023, 8, 11, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(693),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 1,
                             ShortTitle = "Tiltle number 1",
@@ -523,8 +517,8 @@ namespace ProjectMomoDonation.Core.Migrations
                             Id = 2,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-2.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 9, 30, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(346),
-                            DateStart = new DateTime(2023, 8, 11, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(347),
+                            DateEnd = new DateTime(2023, 9, 30, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(715),
+                            DateStart = new DateTime(2023, 8, 11, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(716),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 2,
                             ShortTitle = "Tiltle number 2",
@@ -538,8 +532,8 @@ namespace ProjectMomoDonation.Core.Migrations
                             Id = 3,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-3.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 9, 30, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(349),
-                            DateStart = new DateTime(2023, 8, 11, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(350),
+                            DateEnd = new DateTime(2023, 9, 30, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(721),
+                            DateStart = new DateTime(2023, 8, 11, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(721),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 3,
                             ShortTitle = "Tiltle number 3",
@@ -553,8 +547,8 @@ namespace ProjectMomoDonation.Core.Migrations
                             Id = 4,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-4.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 9, 30, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(352),
-                            DateStart = new DateTime(2023, 8, 11, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(353),
+                            DateEnd = new DateTime(2023, 9, 30, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(726),
+                            DateStart = new DateTime(2023, 8, 11, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(727),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 4,
                             ShortTitle = "Tiltle number 4",
@@ -568,8 +562,8 @@ namespace ProjectMomoDonation.Core.Migrations
                             Id = 5,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-5.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 9, 30, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(355),
-                            DateStart = new DateTime(2023, 8, 11, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(355),
+                            DateEnd = new DateTime(2023, 9, 30, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(731),
+                            DateStart = new DateTime(2023, 8, 11, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(732),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 5,
                             ShortTitle = "Tiltle number 5",
@@ -583,8 +577,8 @@ namespace ProjectMomoDonation.Core.Migrations
                             Id = 6,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-6.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 9, 30, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(359),
-                            DateStart = new DateTime(2023, 8, 11, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(359),
+                            DateEnd = new DateTime(2023, 9, 30, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(750),
+                            DateStart = new DateTime(2023, 8, 11, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(751),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 6,
                             ShortTitle = "Tiltle number 6",
@@ -598,8 +592,8 @@ namespace ProjectMomoDonation.Core.Migrations
                             Id = 7,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-7.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 9, 30, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(362),
-                            DateStart = new DateTime(2023, 8, 11, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(362),
+                            DateEnd = new DateTime(2023, 9, 30, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(755),
+                            DateStart = new DateTime(2023, 8, 11, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(755),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 7,
                             ShortTitle = "Tiltle number 7",
@@ -613,8 +607,8 @@ namespace ProjectMomoDonation.Core.Migrations
                             Id = 8,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-8.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 9, 30, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(364),
-                            DateStart = new DateTime(2023, 8, 11, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(365),
+                            DateEnd = new DateTime(2023, 9, 30, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(761),
+                            DateStart = new DateTime(2023, 8, 11, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(762),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 8,
                             ShortTitle = "Tiltle number 8",
@@ -628,8 +622,8 @@ namespace ProjectMomoDonation.Core.Migrations
                             Id = 9,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-9.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 9, 30, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(367),
-                            DateStart = new DateTime(2023, 8, 11, 10, 15, 2, 850, DateTimeKind.Local).AddTicks(367),
+                            DateEnd = new DateTime(2023, 9, 30, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(766),
+                            DateStart = new DateTime(2023, 8, 11, 10, 2, 15, 440, DateTimeKind.Local).AddTicks(767),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 9,
                             ShortTitle = "Tiltle number 9",

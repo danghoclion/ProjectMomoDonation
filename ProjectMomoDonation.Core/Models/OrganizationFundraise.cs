@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectMomoDonation.Core.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace ProjectMomoDonation.Core.Models
     {
         public int OrganizationFundraiseId { get; set; }
         public string Name { get; set; }
+        public string? UrlSlug { get; set; }
         public string ShortName { get; set; }
         public string Description { get; set; }
         public string Avatar { get; set; }
