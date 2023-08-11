@@ -26,23 +26,21 @@ namespace ProjectMomoDonation.API.Controllers
         public async Task<IActionResult> GetALL()
         {
             var programs = await unitOfWork.ProgramDonation.GetAllAsync();
-            
+
             var listResult = mapper.Map<List<ProgramDonateDTO>>(programs);
-            foreach (var item in programs)
+            for (int i = 0; i < listResult.Count; i++)
             {
-                var category = await unitOfWork.CategoryRepository.GetByIdAsync(item.CategoryId);
-                var organition = await unitOfWork.OrganazationFundraise.GetByIdAsync(item.OrganizationFundraiseId);
-                var historyDonation = unitOfWork.DonateHistoryRepository.GetByWhereAsync(x => x.ProgramDonationId == item.Id).Count();
-                foreach(var result in listResult)
-                {
-                    result.CategoryName = category.Name;
-                    result.OrganizationName = organition.Name;
-                    result.OrganizationAvatar = organition.Avatar;
-                    result.CountDonation = historyDonation;
-                }
+                var category = await unitOfWork.CategoryRepository.GetByIdAsync(programs[i].CategoryId);
+                var organition = await unitOfWork.OrganazationFundraise.GetByIdAsync(programs[i].OrganizationFundraiseId);
+                var historyDonation = unitOfWork.DonateHistoryRepository.GetByWhereAsync(x => x.ProgramDonationId == programs[i].Id).Count();
+                listResult[i].CategoryName = category.Name;
+                listResult[i].OrganizationName = organition.Name;
+                listResult[i].OrganizationAvatar = organition.Avatar;
+                listResult[i].CountDonation = historyDonation;
             }
             return Ok(listResult);
         }
+
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -87,7 +85,6 @@ namespace ProjectMomoDonation.API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-
             var delete = await unitOfWork.ProgramDonation.GetByIdAsync(id);
             if (delete == null)
                 return NotFound();
