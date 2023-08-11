@@ -25,8 +25,9 @@ namespace ProjectMomoDonation.API.Controllers
         public async Task<IActionResult> GetALL()
         {
             var category = await unitOfWork.CategoryRepository.GetAllAsync();
-            return Ok(mapper.Map<List<CategoryDTO>>(category));
+            return Ok(category);
         }
+
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -36,7 +37,7 @@ namespace ProjectMomoDonation.API.Controllers
             {
                 return NotFound();
             }
-            return Ok(mapper.Map<CategoryDTO>(category));
+            return Ok(category);
         }
 
         [HttpPost]
@@ -71,7 +72,6 @@ namespace ProjectMomoDonation.API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-
             var deleteCategory = await unitOfWork.CategoryRepository.GetByIdAsync(id);
             if (deleteCategory == null)
                 return NotFound();
