@@ -63,6 +63,18 @@ namespace ProjectMomoDonation.API.Controllers
         }
 
         [HttpGet]
+        [Route("GetLastest")]
+        public async Task<IActionResult> GetLastest([FromQuery]int size)
+        {
+            var program = await unitOfWork.ProgramDonation.GetProgramLaster(size);
+            if (program == null)
+            {
+                return NotFound();
+            }
+            return Ok(program);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GetByUrlSlug([FromQuery] string urlSlug)
         {
             var program = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.UrlSlug.Contains(urlSlug));

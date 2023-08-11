@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using ProjectMomoDonation.API.DTO;
 using ProjectMomoDonation.Core.Models;
 
@@ -13,6 +14,7 @@ namespace ProjectMomoDonation.API.Mapings
             CreateMap<DonateHistory, DonateHistoryDTO>().ReverseMap();
             CreateMap<ProgramDonation, ProgramDonateDTO>().ReverseMap();
             CreateMap<Core.Models.MomoUser, UserDTO>().ReverseMap();
+            CreateMap<IdentityRole, RoleDTO>().ReverseMap();
         }
     }
 }

@@ -30,5 +30,11 @@ namespace ProjectMomoDoanation.Core.Repository
             var program = await entities.Where(x => x.OrganizationFundraiseId == id).ToListAsync();
             return program;
         }
+
+        public async Task<List<ProgramDonation>> GetProgramLaster(int size)
+        {
+            var program = await entities.OrderBy(x => x.DateStart).Take(size).ToListAsync();
+            return program;
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace ProjectMomoDoanation.Core.Interface
     {
         Task<List<ProgramDonation>> GetProgramsByCategory(int? categoryId);
         Task<List<ProgramDonation>> GetProgramsByOrganition(int? id);
+        Task<List<ProgramDonation>> GetProgramLaster(int size);
     }
 }

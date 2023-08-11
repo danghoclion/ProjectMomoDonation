@@ -14,48 +14,38 @@ namespace ProjectMomoDonation.API.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        //private readonly RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        //private readonly IMapper mapper;
+        private readonly IMapper mapper;
 
-        //public RoleController(RoleManager<IdentityRole> roleManager, IMapper mapper)
-        //{
-        //    this.roleManager = roleManager;
-        //    this.mapper = mapper;
-        //}
+        public RoleController(RoleManager<IdentityRole> roleManager, IMapper mapper)
+        {
+            this.roleManager = roleManager;
+            this.mapper = mapper;
+        }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetALL()
-        //{
-        //    var roles = await roleManager.Roles.ToListAsync();
-        //    return Ok(roles);
-        //}
-        //[HttpGet]
-        //[Route("{id}")]
-        //public async Task<IActionResult> GetById(int id)
-        //{
-        //    var role = await unitOfWork.CategoryRepository.GetByIdAsync(id);
-        //    if (category == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(mapper.Map<CategoryDTO>(category));
-        //}
+        [HttpGet]
+        public async Task<IActionResult> GetALL()
+        {
+            var roles = await roleManager.Roles.ToListAsync();
+            return Ok(roles);
+        }
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            return Ok(role);
+        }
 
-        //[HttpPost]
-        //[ValidateModel]
-        //public async Task<IActionResult> Create([FromBody] CategoryDTO categoryDTO)
-        //{
-        //    var category = mapper.Map<Category>(categoryDTO);
-        //    var newCategory = await unitOfWork.CategoryRepository.CreateAsync(category);
-
-        //    if (newCategory == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(newCategory);
-        //}
+        [HttpPost]
+        [ValidateModel]
+        public async Task<IActionResult> Create([FromBody] RoleDTO roleDTO)
+        {
+            var role = mapper.Map<IdentityRole>(roleDTO);
+            await roleManager.CreateAsync(role);
+            return Ok(role);
+        }
 
         //[HttpPut]
         //[Route("{id}")]
