@@ -1,4 +1,6 @@
-﻿using ProjectMomoDoanation.Core.Interface;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.Core.Data;
 using ProjectMomoDonation.Core.Models;
 using System;
@@ -16,6 +18,17 @@ namespace ProjectMomoDoanation.Core.Repository
 
         public DonateHistoryRepository(MomoDbContext context) : base(context)
         {
+        }
+
+        public async Task<List<DonateHistory>?> GetByUrlSlugProgram(string urlslug)
+        {
+            var program = context.ProgramDonations.Where(x => x.UrlSlug== urlslug).FirstOrDefault();
+            if (program == null) 
+            {
+                return null;
+            }
+            var donateHistory = await entities.Where(x => x.ProgramDonationId == program.Id).ToListAsync();
+            return donateHistory;
         }
     }
 }

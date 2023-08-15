@@ -9,5 +9,6 @@ namespace ProjectMomoDoanation.Core.Interface
 {
     public interface IDonateHistoryRepository : IGenericRepository<DonateHistory>
     {
+        public Task<List<DonateHistory>?> GetByUrlSlugProgram(string urlslug);
     }
 }
