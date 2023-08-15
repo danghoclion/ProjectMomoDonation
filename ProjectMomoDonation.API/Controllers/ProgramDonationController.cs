@@ -64,7 +64,7 @@ namespace ProjectMomoDonation.API.Controllers
 
         [HttpGet]
         [Route("GetLastest")]
-        public async Task<IActionResult> GetLastest([FromQuery]int size)
+        public async Task<IActionResult> GetLastest([FromQuery] int size)
         {
             var program = await unitOfWork.ProgramDonation.GetProgramLaster(size);
             if (program == null)
@@ -77,12 +77,22 @@ namespace ProjectMomoDonation.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetByUrlSlug([FromQuery] string urlSlug)
         {
-            var program = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.UrlSlug.Contains(urlSlug));
+            var program = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.UrlSlug.Contains(urlSlug)).First();
             if (program == null)
             {
                 return NotFound();
             }
-            return Ok(program);
+            var listResult = mapper.Map<ProgramDonateDTO>(program);
+
+            var category = await unitOfWork.CategoryRepository.GetByIdAsync(program.CategoryId);
+            var organition = await unitOfWork.OrganazationFundraise.GetByIdAsync(program.OrganizationFundraiseId);
+            var historyDonation = unitOfWork.DonateHistoryRepository.GetByWhereAsync(x => x.ProgramDonationId == program.Id).Count();
+            listResult.CategoryName = category.Name;
+            listResult.OrganizationName = organition.Name;
+            listResult.OrganizationAvatar = organition.Avatar;
+            listResult.CountDonation = historyDonation;
+
+            return Ok(listResult);
         }
 
         [HttpPost]
