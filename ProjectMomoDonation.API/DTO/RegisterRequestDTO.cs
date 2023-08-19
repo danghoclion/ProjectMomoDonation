@@ -6,7 +6,7 @@ namespace ProjectMomoDonation.API.DTO
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        public string Userame { get; set; }
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

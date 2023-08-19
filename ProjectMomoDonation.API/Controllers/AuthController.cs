@@ -25,8 +25,8 @@ namespace ProjectMomoDonation.API.Controllers
         {
             var identityUser = new IdentityUser
             {
-                UserName = registerRequestDto.Userame,
-                Email = registerRequestDto.Userame,
+                UserName = registerRequestDto.Username,
+                Email = registerRequestDto.Username,
             };
 
             var result = await userManager.CreateAsync(identityUser, registerRequestDto.Password);
