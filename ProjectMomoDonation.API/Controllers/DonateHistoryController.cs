@@ -41,7 +41,15 @@ namespace ProjectMomoDonation.API.Controllers
         public async Task<IActionResult> GetByUsername([FromQuery] string userName)
         {
             var donateHistories = await unitOfWork.DonateHistoryRepository.GetByUserName(userName);
-            return Ok(donateHistories);
+            var result = mapper.Map<List<DonateHistoryDTO>>(donateHistories);
+
+            for(int i=0; i< donateHistories.Count;i++)
+            {
+                var temp = await unitOfWork.ProgramDonation.GetByIdAsync(donateHistories[i].ProgramDonationId);
+                result[i].NameProgram = temp.Title;
+
+            }
+            return Ok(result);
         }
 
         [HttpGet]
