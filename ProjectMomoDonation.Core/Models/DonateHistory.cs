@@ -8,6 +8,7 @@ namespace ProjectMomoDonation.Core.Models
 {
     public class DonateHistory
     {
+        public int HistoryID { get; set; }
         public string Id { get; set; }
         public int ProgramDonationId { get; set; }
         public decimal Amount { get; set; }

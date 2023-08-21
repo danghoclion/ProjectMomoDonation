@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectMomoDonation.Core.Migrations
 {
     /// <inheritdoc />
-    public partial class news : Migration
+    public partial class InitDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -234,25 +234,45 @@ namespace ProjectMomoDonation.Core.Migrations
                 name: "DonateHistorys",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    HistoryID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ProgramDonationId = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Time = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DonateHistorys", x => new { x.Id, x.ProgramDonationId });
+                    table.PrimaryKey("PK_DonateHistorys", x => x.HistoryID);
                     table.ForeignKey(
                         name: "FK_DonateHistorys_AspNetUsers_Id",
                         column: x => x.Id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DonateHistorys_ProgramDonations_ProgramDonationId",
                         column: x => x.ProgramDonationId,
                         principalTable: "ProgramDonations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "1ccb9777-03ff-4e1c-b22d-f7198b2e4e89", "guestRoleId", "guest", "GUEST" },
+                    { "378b471d-756a-46c2-973b-159f2e64bdac", "adminRoleId", "admin", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A", 0, "f411547a-9019-4d5e-9f51-d23d0b622996", "IdentityUser", "guest@gmail.com", true, false, null, "GUEST@GMAIL.COM", "GUEST@GMAIL.COM", "AQAAAAIAAYagAAAAEClTfXayRjZN7NRl6WLsMM3W4GTDI7Dw7p9+uFxsRWvO0zJz/fFZJfVU1sCCmTzNaA==", null, false, "25a3084d-113c-4604-8d55-248b90566236", false, "guest@gmail.com" },
+                    { "8F55A479-468A-480B-9AE9-6B353B2825E0", 0, "e7dc5d13-7801-4459-bc35-54953e988338", "IdentityUser", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEJnZhT7jX9PXQIbXfN5bZ2eMbCnWNsZmX7E9WXqZ7FsCZlRese3ZhhvMx/ZVTQUayw==", null, false, "4d04ebde-3182-4b66-bdc1-cf30287ee90d", false, "admin@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -288,19 +308,44 @@ namespace ProjectMomoDonation.Core.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { "1ccb9777-03ff-4e1c-b22d-f7198b2e4e89", "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A" },
+                    { "378b471d-756a-46c2-973b-159f2e64bdac", "8F55A479-468A-480B-9AE9-6B353B2825E0" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "ProgramDonations",
                 columns: new[] { "Id", "AvatarUrl", "CategoryId", "DateEnd", "DateStart", "DonationGoal", "OrganizationFundraiseId", "ShortTitle", "Status", "Story", "Title", "TotalDonate", "UrlSlug" },
                 values: new object[,]
                 {
-                    { 1, "https://swiperjs.com/demos/images/nature-1.jpg", 1, new DateTime(2023, 10, 10, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(760), new DateTime(2023, 8, 21, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(790), 500000m, 1, "Tiltle number 1", "", "Story number 1", "Tiltle long number 1", 50000m, null },
-                    { 2, "https://swiperjs.com/demos/images/nature-2.jpg", 1, new DateTime(2023, 10, 10, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(812), new DateTime(2023, 8, 21, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(813), 500000m, 2, "Tiltle number 2", "", "Story number 2", "Tiltle long number 2", 100000m, null },
-                    { 3, "https://swiperjs.com/demos/images/nature-3.jpg", 1, new DateTime(2023, 10, 10, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(818), new DateTime(2023, 8, 21, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(819), 500000m, 3, "Tiltle number 3", "", "Story number 3", "Tiltle long number 3", 150000m, null },
-                    { 4, "https://swiperjs.com/demos/images/nature-4.jpg", 1, new DateTime(2023, 10, 10, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(823), new DateTime(2023, 8, 21, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(824), 500000m, 4, "Tiltle number 4", "", "Story number 4", "Tiltle long number 4", 200000m, null },
-                    { 5, "https://swiperjs.com/demos/images/nature-5.jpg", 1, new DateTime(2023, 10, 10, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(829), new DateTime(2023, 8, 21, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(830), 500000m, 5, "Tiltle number 5", "", "Story number 5", "Tiltle long number 5", 250000m, null },
-                    { 6, "https://swiperjs.com/demos/images/nature-6.jpg", 1, new DateTime(2023, 10, 10, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(836), new DateTime(2023, 8, 21, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(836), 500000m, 6, "Tiltle number 6", "", "Story number 6", "Tiltle long number 6", 300000m, null },
-                    { 7, "https://swiperjs.com/demos/images/nature-7.jpg", 1, new DateTime(2023, 10, 10, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(842), new DateTime(2023, 8, 21, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(842), 500000m, 7, "Tiltle number 7", "", "Story number 7", "Tiltle long number 7", 350000m, null },
-                    { 8, "https://swiperjs.com/demos/images/nature-8.jpg", 1, new DateTime(2023, 10, 10, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(848), new DateTime(2023, 8, 21, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(848), 500000m, 8, "Tiltle number 8", "", "Story number 8", "Tiltle long number 8", 400000m, null },
-                    { 9, "https://swiperjs.com/demos/images/nature-9.jpg", 1, new DateTime(2023, 10, 10, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(854), new DateTime(2023, 8, 21, 11, 35, 58, 361, DateTimeKind.Local).AddTicks(854), 500000m, 9, "Tiltle number 9", "", "Story number 9", "Tiltle long number 9", 450000m, null }
+                    { 1, "https://swiperjs.com/demos/images/nature-1.jpg", 1, new DateTime(2023, 10, 10, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(7920), new DateTime(2023, 8, 21, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(7945), 500000m, 1, "Tiltle number 1", "", "Story number 1", "Tiltle long number 1", 50000m, null },
+                    { 2, "https://swiperjs.com/demos/images/nature-2.jpg", 1, new DateTime(2023, 10, 10, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(7965), new DateTime(2023, 8, 21, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(7965), 500000m, 2, "Tiltle number 2", "", "Story number 2", "Tiltle long number 2", 100000m, null },
+                    { 3, "https://swiperjs.com/demos/images/nature-3.jpg", 1, new DateTime(2023, 10, 10, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8033), new DateTime(2023, 8, 21, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8034), 500000m, 3, "Tiltle number 3", "", "Story number 3", "Tiltle long number 3", 150000m, null },
+                    { 4, "https://swiperjs.com/demos/images/nature-4.jpg", 1, new DateTime(2023, 10, 10, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8039), new DateTime(2023, 8, 21, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8040), 500000m, 4, "Tiltle number 4", "", "Story number 4", "Tiltle long number 4", 200000m, null },
+                    { 5, "https://swiperjs.com/demos/images/nature-5.jpg", 1, new DateTime(2023, 10, 10, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8045), new DateTime(2023, 8, 21, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8045), 500000m, 5, "Tiltle number 5", "", "Story number 5", "Tiltle long number 5", 250000m, null },
+                    { 6, "https://swiperjs.com/demos/images/nature-6.jpg", 1, new DateTime(2023, 10, 10, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8053), new DateTime(2023, 8, 21, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8054), 500000m, 6, "Tiltle number 6", "", "Story number 6", "Tiltle long number 6", 300000m, null },
+                    { 7, "https://swiperjs.com/demos/images/nature-7.jpg", 1, new DateTime(2023, 10, 10, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8059), new DateTime(2023, 8, 21, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8059), 500000m, 7, "Tiltle number 7", "", "Story number 7", "Tiltle long number 7", 350000m, null },
+                    { 8, "https://swiperjs.com/demos/images/nature-8.jpg", 1, new DateTime(2023, 10, 10, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8064), new DateTime(2023, 8, 21, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8066), 500000m, 8, "Tiltle number 8", "", "Story number 8", "Tiltle long number 8", 400000m, null },
+                    { 9, "https://swiperjs.com/demos/images/nature-9.jpg", 1, new DateTime(2023, 10, 10, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8071), new DateTime(2023, 8, 21, 15, 10, 10, 429, DateTimeKind.Local).AddTicks(8072), 500000m, 9, "Tiltle number 9", "", "Story number 9", "Tiltle long number 9", 450000m, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DonateHistorys",
+                columns: new[] { "HistoryID", "Amount", "Id", "ProgramDonationId", "Time" },
+                values: new object[,]
+                {
+                    { 1, 200000m, "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A", 1, new DateTime(2023, 8, 21, 16, 10, 10, 703, DateTimeKind.Local).AddTicks(8730) },
+                    { 2, 400000m, "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A", 2, new DateTime(2023, 8, 21, 17, 10, 10, 703, DateTimeKind.Local).AddTicks(8762) },
+                    { 3, 600000m, "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A", 3, new DateTime(2023, 8, 21, 18, 10, 10, 703, DateTimeKind.Local).AddTicks(8764) },
+                    { 4, 800000m, "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A", 4, new DateTime(2023, 8, 21, 19, 10, 10, 703, DateTimeKind.Local).AddTicks(8765) },
+                    { 5, 1000000m, "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A", 5, new DateTime(2023, 8, 21, 20, 10, 10, 703, DateTimeKind.Local).AddTicks(8767) },
+                    { 6, 1200000m, "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A", 6, new DateTime(2023, 8, 21, 21, 10, 10, 703, DateTimeKind.Local).AddTicks(8780) },
+                    { 7, 1400000m, "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A", 7, new DateTime(2023, 8, 21, 22, 10, 10, 703, DateTimeKind.Local).AddTicks(8781) },
+                    { 8, 1600000m, "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A", 8, new DateTime(2023, 8, 21, 23, 10, 10, 703, DateTimeKind.Local).AddTicks(8782) },
+                    { 9, 1800000m, "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A", 9, new DateTime(2023, 8, 22, 0, 10, 10, 703, DateTimeKind.Local).AddTicks(8783) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -341,6 +386,11 @@ namespace ProjectMomoDonation.Core.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DonateHistorys_Id",
+                table: "DonateHistorys",
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DonateHistorys_ProgramDonationId",

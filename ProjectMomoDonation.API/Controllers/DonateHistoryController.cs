@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.API.DTO;
@@ -13,12 +14,14 @@ namespace ProjectMomoDonation.API.Controllers
     public class DonateHistoryController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly UserManager<IdentityUser> userManager;
         private readonly IMapper mapper;
 
-        public DonateHistoryController(IUnitOfWork unitOfWork, IMapper mapper)
+        public DonateHistoryController(IUnitOfWork unitOfWork, IMapper mapper, UserManager<IdentityUser> userManager)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -30,10 +33,19 @@ namespace ProjectMomoDonation.API.Controllers
 
         [HttpGet]
         [Route("GetByUrlslugProgram")]
-        public async Task<IActionResult> GetByUrlslugProgram([FromQuery]string urlslug)
+        public async Task<IActionResult> GetByUrlslugProgram([FromQuery] string urlslug)
         {
             var donateHistories = await unitOfWork.DonateHistoryRepository.GetByUrlSlugProgram(urlslug);
-            return Ok(donateHistories);
+            var result = mapper.Map<List<DonateHistoryDTO>>(donateHistories);
+
+            for (int i = 0; i < donateHistories.Count; i++)
+            {
+                var temp = await unitOfWork.ProgramDonation.GetByIdAsync(donateHistories[i].ProgramDonationId);
+                result[i].NameProgram = temp.ShortTitle;
+                var user = await userManager.FindByIdAsync(donateHistories[i].Id);
+                result[i].UserName = user.UserName;
+            }
+            return Ok(result);
         }
 
         [HttpGet]
@@ -43,11 +55,11 @@ namespace ProjectMomoDonation.API.Controllers
             var donateHistories = await unitOfWork.DonateHistoryRepository.GetByUserName(userName);
             var result = mapper.Map<List<DonateHistoryDTO>>(donateHistories);
 
-            for(int i=0; i< donateHistories.Count;i++)
+            for (int i = 0; i < donateHistories.Count; i++)
             {
                 var temp = await unitOfWork.ProgramDonation.GetByIdAsync(donateHistories[i].ProgramDonationId);
-                result[i].NameProgram = temp.Title;
-
+                result[i].NameProgram = temp.ShortTitle;
+                result[i].UserName = userName;
             }
             return Ok(result);
         }
@@ -83,7 +95,6 @@ namespace ProjectMomoDonation.API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-
             var delete = await unitOfWork.DonateHistoryRepository.GetByIdAsync(id);
             if (delete == null)
                 return NotFound();
