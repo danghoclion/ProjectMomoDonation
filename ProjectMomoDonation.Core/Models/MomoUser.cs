@@ -10,6 +10,7 @@ namespace ProjectMomoDonation.Core.Models
     public class MomoUser : IdentityUser
     {
         public string Status { get; set; }
+        public string Name { get; set; }
 
         public virtual ICollection<DonateHistory>? DonateHistorys { get; set; }
 

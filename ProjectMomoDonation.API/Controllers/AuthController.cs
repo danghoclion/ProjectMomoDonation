@@ -66,6 +66,7 @@ namespace ProjectMomoDonation.API.Controllers
                         {
                             JwtToken = token,
                             Name = loginRequest.Username,
+                            RoleName = roles.ToList(),
                             Status = "Susscess"
                         };
                         return Ok(response);
