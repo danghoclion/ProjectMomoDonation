@@ -164,6 +164,8 @@ namespace ProjectMomoDonation.Core.Data.SeedData
             //});
 
             //modelBuilder.Entity<IdentityUserRole<string>>().HasData(userRoles);
+
+
         }
     }
 }
