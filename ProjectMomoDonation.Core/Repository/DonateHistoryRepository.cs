@@ -30,5 +30,12 @@ namespace ProjectMomoDoanation.Core.Repository
             var donateHistory = await entities.Where(x => x.ProgramDonationId == program.Id).ToListAsync();
             return donateHistory;
         }
+
+        public async Task<List<DonateHistory>> GetByUserName(string name)
+        {
+            var donateHistory = await entities.Where(x => x.MomoUser.UserName == name).ToListAsync();
+            if(donateHistory == null) { return null; }
+            return donateHistory;
+        }
     }
 }

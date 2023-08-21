@@ -35,6 +35,15 @@ namespace ProjectMomoDonation.API.Controllers
             var donateHistories = await unitOfWork.DonateHistoryRepository.GetByUrlSlugProgram(urlslug);
             return Ok(donateHistories);
         }
+
+        [HttpGet]
+        [Route("GetByUsername")]
+        public async Task<IActionResult> GetByUsername([FromQuery] string userName)
+        {
+            var donateHistories = await unitOfWork.DonateHistoryRepository.GetByUserName(userName);
+            return Ok(donateHistories);
+        }
+
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetById(int id)
