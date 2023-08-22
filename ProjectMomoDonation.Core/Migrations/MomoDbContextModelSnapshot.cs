@@ -47,6 +47,22 @@ namespace ProjectMomoDonation.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "378b471d-756a-46c2-973b-159f2e64bdac",
+                            ConcurrencyStamp = "adminRoleId",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "1ccb9777-03ff-4e1c-b22d-f7198b2e4e89",
+                            ConcurrencyStamp = "guestRoleId",
+                            Name = "guest",
+                            NormalizedName = "GUEST"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -145,6 +161,40 @@ namespace ProjectMomoDonation.Core.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
 
                     b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "8F55A479-468A-480B-9AE9-6B353B2825E0",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d09eca5d-69eb-4a7d-a429-dfcab937e153",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAELy5tckVinPuFDetypr5kN40rQDrSJKbHn6RN+VQlcm3fFZ+AmSYlwFhxcS/3Xv+Eg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "0ae5288d-9ea4-48a7-a4d8-975be7240ccb",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "35e5b383-53f4-4141-8e45-4cf8fd81703d",
+                            Email = "guest@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GUEST@GMAIL.COM",
+                            NormalizedUserName = "GUEST@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKO6LhqcEPhaI7vY9p5//zV4DgYeMxTSsxbv3mCrjDsbjn3CSbN/cuGPQsgi0uhbUw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "07dc96a9-6717-47f8-a005-41cd969c3f26",
+                            TwoFactorEnabled = false,
+                            UserName = "guest@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -207,6 +257,18 @@ namespace ProjectMomoDonation.Core.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "8F55A479-468A-480B-9AE9-6B353B2825E0",
+                            RoleId = "378b471d-756a-46c2-973b-159f2e64bdac"
+                        },
+                        new
+                        {
+                            UserId = "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A",
+                            RoleId = "1ccb9777-03ff-4e1c-b22d-f7198b2e4e89"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -310,23 +372,105 @@ namespace ProjectMomoDonation.Core.Migrations
 
             modelBuilder.Entity("ProjectMomoDonation.Core.Models.DonateHistory", b =>
                 {
+                    b.Property<int>("HistoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HistoryID"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ProgramDonationId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id", "ProgramDonationId");
+                    b.HasKey("HistoryID");
+
+                    b.HasIndex("Id");
 
                     b.HasIndex("ProgramDonationId");
 
                     b.ToTable("DonateHistorys");
+
+                    b.HasData(
+                        new
+                        {
+                            HistoryID = 1,
+                            Amount = 200000m,
+                            Id = "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A",
+                            ProgramDonationId = 1,
+                            Time = new DateTime(2023, 8, 22, 0, 41, 30, 766, DateTimeKind.Local).AddTicks(8234)
+                        },
+                        new
+                        {
+                            HistoryID = 2,
+                            Amount = 400000m,
+                            Id = "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A",
+                            ProgramDonationId = 2,
+                            Time = new DateTime(2023, 8, 22, 1, 41, 30, 766, DateTimeKind.Local).AddTicks(8264)
+                        },
+                        new
+                        {
+                            HistoryID = 3,
+                            Amount = 600000m,
+                            Id = "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A",
+                            ProgramDonationId = 3,
+                            Time = new DateTime(2023, 8, 22, 2, 41, 30, 766, DateTimeKind.Local).AddTicks(8266)
+                        },
+                        new
+                        {
+                            HistoryID = 4,
+                            Amount = 800000m,
+                            Id = "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A",
+                            ProgramDonationId = 4,
+                            Time = new DateTime(2023, 8, 22, 3, 41, 30, 766, DateTimeKind.Local).AddTicks(8267)
+                        },
+                        new
+                        {
+                            HistoryID = 5,
+                            Amount = 1000000m,
+                            Id = "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A",
+                            ProgramDonationId = 5,
+                            Time = new DateTime(2023, 8, 22, 4, 41, 30, 766, DateTimeKind.Local).AddTicks(8269)
+                        },
+                        new
+                        {
+                            HistoryID = 6,
+                            Amount = 1200000m,
+                            Id = "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A",
+                            ProgramDonationId = 6,
+                            Time = new DateTime(2023, 8, 22, 5, 41, 30, 766, DateTimeKind.Local).AddTicks(8282)
+                        },
+                        new
+                        {
+                            HistoryID = 7,
+                            Amount = 1400000m,
+                            Id = "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A",
+                            ProgramDonationId = 7,
+                            Time = new DateTime(2023, 8, 22, 6, 41, 30, 766, DateTimeKind.Local).AddTicks(8283)
+                        },
+                        new
+                        {
+                            HistoryID = 8,
+                            Amount = 1600000m,
+                            Id = "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A",
+                            ProgramDonationId = 8,
+                            Time = new DateTime(2023, 8, 22, 7, 41, 30, 766, DateTimeKind.Local).AddTicks(8284)
+                        },
+                        new
+                        {
+                            HistoryID = 9,
+                            Amount = 1800000m,
+                            Id = "6D7D3D3E-6E4D-4CD3-951B-2AE1DF03698A",
+                            ProgramDonationId = 9,
+                            Time = new DateTime(2023, 8, 22, 8, 41, 30, 766, DateTimeKind.Local).AddTicks(8285)
+                        });
                 });
 
             modelBuilder.Entity("ProjectMomoDonation.Core.Models.OrganizationFundraise", b =>
@@ -511,135 +655,144 @@ namespace ProjectMomoDonation.Core.Migrations
                             Id = 1,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-1.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 10, 10, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3307),
-                            DateStart = new DateTime(2023, 8, 21, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3332),
+                            DateEnd = new DateTime(2023, 10, 10, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7581),
+                            DateStart = new DateTime(2023, 8, 21, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7601),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 1,
                             ShortTitle = "Tiltle number 1",
                             Status = "",
                             Story = "Story number 1",
                             Title = "Tiltle long number 1",
-                            TotalDonate = 50000m
+                            TotalDonate = 50000m,
+                            UrlSlug = "url-1"
                         },
                         new
                         {
                             Id = 2,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-2.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 10, 10, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3351),
-                            DateStart = new DateTime(2023, 8, 21, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3352),
+                            DateEnd = new DateTime(2023, 10, 10, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7620),
+                            DateStart = new DateTime(2023, 8, 21, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7620),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 2,
                             ShortTitle = "Tiltle number 2",
                             Status = "",
                             Story = "Story number 2",
                             Title = "Tiltle long number 2",
-                            TotalDonate = 100000m
+                            TotalDonate = 100000m,
+                            UrlSlug = "url-2"
                         },
                         new
                         {
                             Id = 3,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-3.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 10, 10, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3357),
-                            DateStart = new DateTime(2023, 8, 21, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3358),
+                            DateEnd = new DateTime(2023, 10, 10, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7627),
+                            DateStart = new DateTime(2023, 8, 21, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7628),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 3,
                             ShortTitle = "Tiltle number 3",
                             Status = "",
                             Story = "Story number 3",
                             Title = "Tiltle long number 3",
-                            TotalDonate = 150000m
+                            TotalDonate = 150000m,
+                            UrlSlug = "url-3"
                         },
                         new
                         {
                             Id = 4,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-4.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 10, 10, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3398),
-                            DateStart = new DateTime(2023, 8, 21, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3399),
+                            DateEnd = new DateTime(2023, 10, 10, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7634),
+                            DateStart = new DateTime(2023, 8, 21, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7635),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 4,
                             ShortTitle = "Tiltle number 4",
                             Status = "",
                             Story = "Story number 4",
                             Title = "Tiltle long number 4",
-                            TotalDonate = 200000m
+                            TotalDonate = 200000m,
+                            UrlSlug = "url-4"
                         },
                         new
                         {
                             Id = 5,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-5.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 10, 10, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3404),
-                            DateStart = new DateTime(2023, 8, 21, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3405),
+                            DateEnd = new DateTime(2023, 10, 10, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7642),
+                            DateStart = new DateTime(2023, 8, 21, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7642),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 5,
                             ShortTitle = "Tiltle number 5",
                             Status = "",
                             Story = "Story number 5",
                             Title = "Tiltle long number 5",
-                            TotalDonate = 250000m
+                            TotalDonate = 250000m,
+                            UrlSlug = "url-5"
                         },
                         new
                         {
                             Id = 6,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-6.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 10, 10, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3412),
-                            DateStart = new DateTime(2023, 8, 21, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3413),
+                            DateEnd = new DateTime(2023, 10, 10, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7650),
+                            DateStart = new DateTime(2023, 8, 21, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7650),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 6,
                             ShortTitle = "Tiltle number 6",
                             Status = "",
                             Story = "Story number 6",
                             Title = "Tiltle long number 6",
-                            TotalDonate = 300000m
+                            TotalDonate = 300000m,
+                            UrlSlug = "url-6"
                         },
                         new
                         {
                             Id = 7,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-7.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 10, 10, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3418),
-                            DateStart = new DateTime(2023, 8, 21, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3419),
+                            DateEnd = new DateTime(2023, 10, 10, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7657),
+                            DateStart = new DateTime(2023, 8, 21, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7657),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 7,
                             ShortTitle = "Tiltle number 7",
                             Status = "",
                             Story = "Story number 7",
                             Title = "Tiltle long number 7",
-                            TotalDonate = 350000m
+                            TotalDonate = 350000m,
+                            UrlSlug = "url-7"
                         },
                         new
                         {
                             Id = 8,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-8.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 10, 10, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3424),
-                            DateStart = new DateTime(2023, 8, 21, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3424),
+                            DateEnd = new DateTime(2023, 10, 10, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7664),
+                            DateStart = new DateTime(2023, 8, 21, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7664),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 8,
                             ShortTitle = "Tiltle number 8",
                             Status = "",
                             Story = "Story number 8",
                             Title = "Tiltle long number 8",
-                            TotalDonate = 400000m
+                            TotalDonate = 400000m,
+                            UrlSlug = "url-8"
                         },
                         new
                         {
                             Id = 9,
                             AvatarUrl = "https://swiperjs.com/demos/images/nature-9.jpg",
                             CategoryId = 1,
-                            DateEnd = new DateTime(2023, 10, 10, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3430),
-                            DateStart = new DateTime(2023, 8, 21, 14, 46, 28, 981, DateTimeKind.Local).AddTicks(3431),
+                            DateEnd = new DateTime(2023, 10, 10, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7671),
+                            DateStart = new DateTime(2023, 8, 21, 23, 41, 30, 503, DateTimeKind.Local).AddTicks(7671),
                             DonationGoal = 500000m,
                             OrganizationFundraiseId = 9,
                             ShortTitle = "Tiltle number 9",
                             Status = "",
                             Story = "Story number 9",
                             Title = "Tiltle long number 9",
-                            TotalDonate = 450000m
+                            TotalDonate = 450000m,
+                            UrlSlug = "url-9"
                         });
                 });
 
@@ -713,9 +866,7 @@ namespace ProjectMomoDonation.Core.Migrations
                 {
                     b.HasOne("ProjectMomoDonation.Core.Models.MomoUser", "MomoUser")
                         .WithMany("DonateHistorys")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Id");
 
                     b.HasOne("ProjectMomoDonation.Core.Models.ProgramDonation", "ProgramDonation")
                         .WithMany("DonateHistorys")

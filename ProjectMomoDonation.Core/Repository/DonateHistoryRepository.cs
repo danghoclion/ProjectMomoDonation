@@ -22,8 +22,8 @@ namespace ProjectMomoDoanation.Core.Repository
 
         public async Task<List<DonateHistory>?> GetByUrlSlugProgram(string urlslug)
         {
-            var program = context.ProgramDonations.Where(x => x.UrlSlug== urlslug).FirstOrDefault();
-            if (program == null) 
+            var program = context.ProgramDonations.Where(x => x.UrlSlug == urlslug).FirstOrDefault();
+            if (program == null)
             {
                 return null;
             }
@@ -33,10 +33,10 @@ namespace ProjectMomoDoanation.Core.Repository
 
         public async Task<List<DonateHistory>> GetByUserName(string name)
         {
-            var user = context.MomoUsers.Where(x => x.Name==name).FirstOrDefault();
+            var user = context.Users.Where(x => x.UserName == name).FirstOrDefault();
             var donateHistory = await entities.Where(x => x.Id == user.Id).ToListAsync();
 
-            if(donateHistory == null) { return null; }
+            if (donateHistory == null) { return null; }
             return donateHistory;
         }
     }

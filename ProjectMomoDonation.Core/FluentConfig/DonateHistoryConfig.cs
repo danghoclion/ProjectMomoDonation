@@ -13,7 +13,7 @@ namespace ProjectMomoDonation.Core.FluentConfig
     {
         public void Configure(EntityTypeBuilder<DonateHistory> builder)
         {
-            builder.HasKey(x => new { x.Id, x.ProgramDonationId });
+            builder.HasKey(x => x.HistoryID);
             builder.HasOne(x => x.MomoUser).WithMany(pc => pc.DonateHistorys).HasForeignKey(pc => pc.Id);
             builder.HasOne(x => x.ProgramDonation).WithMany(pc => pc.DonateHistorys).HasForeignKey(pc => pc.ProgramDonationId);
         }
