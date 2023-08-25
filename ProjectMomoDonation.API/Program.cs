@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.API.Mapings;
+using ProjectMomoDonation.API.ValidateHelper;
 using ProjectMomoDonation.Core.Data;
 using ProjectMomoDonation.Core.UnitOfWork;
 using System.Text;
@@ -90,6 +91,9 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 );
 
 builder.Services.AddHttpClient();
+
+builder.Services.AddHostedService<AutoSetStatusService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

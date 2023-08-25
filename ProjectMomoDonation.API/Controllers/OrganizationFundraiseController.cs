@@ -76,11 +76,8 @@ namespace ProjectMomoDonation.API.Controllers
             if (delete == null)
                 return NotFound();
             await unitOfWork.OrganazationFundraise.Deletesync(delete);
-<<<<<<< HEAD
-            return Ok(mapper.Map<OrganizationFundraise>(delete));
-=======
+
             return Ok(mapper.Map<OrganazationFundraiseDTO>(delete));
->>>>>>> 3ef7f785c303615d22e308bbad91ae5b1b949c8c
         }
     }
 }

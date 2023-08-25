@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.API.DTO;
 using ProjectMomoDonation.API.ValidateHelper;
+using ProjectMomoDonation.Core.Helper;
 using ProjectMomoDonation.Core.Models;
+using System;
 using System.Text.Json;
 
 namespace ProjectMomoDonation.API.Controllers
@@ -20,6 +22,7 @@ namespace ProjectMomoDonation.API.Controllers
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            //Helper.SetStatusProgram(unitOfWork);
         }
 
         [HttpGet]
@@ -57,11 +60,19 @@ namespace ProjectMomoDonation.API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var program = await unitOfWork.ProgramDonation.GetByIdAsync(id);
+            var result = mapper.Map<ProgramDonateDTO>(program);
+            var category = await unitOfWork.CategoryRepository.GetByIdAsync(program.CategoryId);
+            var organition = await unitOfWork.OrganazationFundraise.GetByIdAsync(program.OrganizationFundraiseId);
+            var historyDonation = unitOfWork.DonateHistoryRepository.GetByWhereAsync(x => x.ProgramDonationId == program.Id).Count();
+            result.OrganizationName= organition.Name; 
+            result.CategoryName =category.Name;
+            result.OrganizationAvatar= organition.Avatar;
+            result.CountDonation = historyDonation;
             if (program == null)
             {
                 return NotFound();
             }
-            return Ok(program);
+            return Ok(mapper.Map<List<ProgramDonateDTO>>(program));
         }
 
         [HttpGet]
@@ -73,7 +84,7 @@ namespace ProjectMomoDonation.API.Controllers
             {
                 return NotFound();
             }
-            return Ok(program);
+            return Ok(mapper.Map<List<ProgramDonateDTO>>(program));
         }
 
         [HttpGet]
