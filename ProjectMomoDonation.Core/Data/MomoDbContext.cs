@@ -31,7 +31,7 @@ namespace ProjectMomoDonation.Core.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DangHocPC;Database=MomoDatabase;Trusted_Connection=True;MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-OJ0HV03;Database=MomoDatabase;Trusted_Connection=True;MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True;");
             }
         }
 
