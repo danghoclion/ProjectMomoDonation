@@ -38,11 +38,11 @@ namespace ProjectMomoDonation.API.Controllers
                     result = await userManager.AddToRolesAsync(identityUser, registerRequestDto.Roles);
 
                     if (result.Succeeded)
-                        return Ok("User was registered, please login");
+                        return Ok();
                 }
             }
 
-            return BadRequest("Something went wrong");
+            return BadRequest();
         }
 
         [HttpPost]
