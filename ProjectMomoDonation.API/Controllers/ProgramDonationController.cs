@@ -24,7 +24,7 @@ namespace ProjectMomoDonation.API.Controllers
 
         [HttpGet]
         [Route("filter")]
-        public async Task<IActionResult> GetALL([FromQuery] int? categoryId, [FromQuery] int? organitionId)
+        public async Task<IActionResult> GetALL([FromQuery] int? categoryId, [FromQuery] int? organitionId, string? status)
         {
             var programs = await unitOfWork.ProgramDonation.GetAllAsync();
 
@@ -36,6 +36,8 @@ namespace ProjectMomoDonation.API.Controllers
             {
                 programs = await unitOfWork.ProgramDonation.GetProgramsByOrganition(organitionId);
             }
+            if (status != null)
+                programs = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.Status.Equals(status)).ToList();
             var listResult = mapper.Map<List<ProgramDonateDTO>>(programs);
             for (int i = 0; i < listResult.Count; i++)
             {
@@ -116,6 +118,11 @@ namespace ProjectMomoDonation.API.Controllers
         {
             var program = mapper.Map<ProgramDonation>(programDTO);
             program.Id = id;
+            var categoryId = unitOfWork.CategoryRepository.GetByWhereAsync(x => x.Name == programDTO.CategoryName).FirstOrDefault();
+            var orgazitionId = unitOfWork.OrganazationFundraise.GetByWhereAsync(x => x.Name == programDTO.OrganizationName).FirstOrDefault();
+            program.CategoryId = categoryId.CategoryId;
+            program.OrganizationFundraiseId = orgazitionId.OrganizationFundraiseId;
+
             var update = await unitOfWork.ProgramDonation.UpdateAsync(program);
 
             if (update == null)
