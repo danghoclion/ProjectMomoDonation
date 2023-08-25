@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using ProjectMomoDonation.API.MomoPayment;
+using ProjectMomoDonation.Core.Helper;
+using ProjectMomoDonation.Core.Models;
+using System.Buffers.Text;
 using System.Text.Json;
 
 namespace ProjectMomoDonation.API.Controllers
@@ -11,7 +14,7 @@ namespace ProjectMomoDonation.API.Controllers
     public class PaymentController : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> CreatePayment()
+        public async Task<IActionResult> CreatePayment([FromQuery] string money, string userName, string programId, string urlRedirect)
         {
             //request params need to request to MoMo system
             string endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
@@ -19,14 +22,22 @@ namespace ProjectMomoDonation.API.Controllers
             string accessKey = "M8brj9K6E22vXoDB";
             string serectkey = "nqQiVSgDMy809JoPF6OzP5OdBUB550Y4";
             string orderInfo = "Momo thanh toán";
-            string redirectUrl = "Youtube.com";
-            string ipnUrl = "youtube.com";
+            string redirectUrl = urlRedirect;
+            string ipnUrl = urlRedirect;
             string requestType = "captureWallet";
 
-            string amount = 150000.ToString();
+            string amount = money;
             string orderId = Guid.NewGuid().ToString();
             string requestId = Guid.NewGuid().ToString();
-            string extraData = "";
+
+            JObject extra = new JObject
+            {
+                { "UserName", userName },
+                { "ProgramId", programId },
+                { "AmountDonate", money }
+            };
+        
+            string extraData = extra.ToString().Base64Encode();
 
             //Before sign HMAC SHA256 signature
             string rawHash = "accessKey=" + accessKey +
@@ -48,22 +59,6 @@ namespace ProjectMomoDonation.API.Controllers
             string signature = crypto.signSHA256(rawHash, serectkey);
             //log.Debug("Signature = " + signature);
 
-            MomoRequest requestTest = new MomoRequest()
-            {
-                partnerCode = partnerCode,
-                partnerName = "test",
-                storeId = Guid.NewGuid().ToString(),
-                signature = signature,
-                requestId= requestId,
-                orderId=orderId,
-                amount=amount,
-                orderInfo =orderInfo,
-                redirectUrl=redirectUrl,
-                ipnUrl=ipnUrl,
-                lang ="en",
-                extraData= extraData,
-                requestType = requestType,
-            };
             //build body json request
             JObject message = new JObject
             {
@@ -85,11 +80,19 @@ namespace ProjectMomoDonation.API.Controllers
             //log.Debug("Json request to MoMo: " + message.ToString());
             string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
 
-            var responetest = PaymentRequest.sendRequest(requestTest);
-            JObject jmessage = JObject.Parse(responseFromMomo);
+            var jsonResult = JsonSerializer.Deserialize<MomoResposeUrl>(responseFromMomo);
+            return Ok(jsonResult);
+        }
 
-            //var jsonResult = JsonSerializer.Deserialize<MomoResposeUrl>(jmessage.ToString());
-            return Ok(responseFromMomo);
+        [HttpPost]
+        [Route("Response")]
+        public async Task<IActionResult> RedirectUrlMomo([FromBody]MomoRequest momoRequest)
+        {
+            JObject keyValuePairs = JObject.Parse(momoRequest.extraData);
+            var data = momoRequest.extraData.Base64Decode();
+            var a = keyValuePairs["UserName"];
+            DonateHistory history = new DonateHistory();
+            return Ok();
         }
     }
 }
