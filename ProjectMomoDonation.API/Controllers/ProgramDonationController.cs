@@ -64,15 +64,12 @@ namespace ProjectMomoDonation.API.Controllers
             var category = await unitOfWork.CategoryRepository.GetByIdAsync(program.CategoryId);
             var organition = await unitOfWork.OrganazationFundraise.GetByIdAsync(program.OrganizationFundraiseId);
             var historyDonation = unitOfWork.DonateHistoryRepository.GetByWhereAsync(x => x.ProgramDonationId == program.Id).Count();
-            result.OrganizationName= organition.Name; 
-            result.CategoryName =category.Name;
-            result.OrganizationAvatar= organition.Avatar;
+            result.OrganizationName = organition.Name;
+            result.CategoryName = category.Name;
+            result.OrganizationAvatar = organition.Avatar;
             result.CountDonation = historyDonation;
-            if (program == null)
-            {
-                return NotFound();
-            }
-            return Ok(mapper.Map<List<ProgramDonateDTO>>(program));
+
+            return Ok(result);
         }
 
         [HttpGet]
@@ -110,9 +107,15 @@ namespace ProjectMomoDonation.API.Controllers
 
         [HttpPost]
         [ValidateModel]
-        public async Task<IActionResult> Create([FromBody] ProgramDonateDTO programDTO)
+        public async Task<IActionResult> Create([FromBody] ProgramCreateDTO programDTO)
         {
             var program = mapper.Map<ProgramDonation>(programDTO);
+            var categoryId = unitOfWork.CategoryRepository.GetByWhereAsync(x => x.Name == programDTO.CategoryName).FirstOrDefault();
+            var orgazitionId = unitOfWork.OrganazationFundraise.GetByWhereAsync(x => x.Name == programDTO.OrganizationName).FirstOrDefault();
+            program.CategoryId = categoryId.CategoryId;
+            program.OrganizationFundraiseId = orgazitionId.OrganizationFundraiseId;
+            program.TotalDonate = 0;
+            program.Status = "Đang quyên góp";
             var newProgram = await unitOfWork.ProgramDonation.CreateAsync(program);
 
             if (newProgram == null)
@@ -120,12 +123,12 @@ namespace ProjectMomoDonation.API.Controllers
                 return NotFound();
             }
 
-            return Ok(newProgram);
+            return Ok(mapper.Map<ProgramCreateDTO>(newProgram));
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] ProgramDonateDTO programDTO)
+        public async Task<IActionResult> Update(int id, [FromBody] ProgramCreateDTO programDTO)
         {
             var program = mapper.Map<ProgramDonation>(programDTO);
             program.Id = id;
@@ -138,7 +141,7 @@ namespace ProjectMomoDonation.API.Controllers
 
             if (update == null)
                 return NotFound();
-            return Ok(mapper.Map<UserDTO>(update));
+            return Ok(mapper.Map<ProgramCreateDTO>(update));
         }
 
         [HttpDelete]

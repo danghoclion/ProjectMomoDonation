@@ -1,6 +1,7 @@
 ﻿using ProjectMomoDonation.Core.Helper;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,10 @@ namespace ProjectMomoDonation.Core.Models
         public string Status { get; set; }
         public int CategoryId { get; set; }
         public int OrganizationFundraiseId { get; set; }
+
+        [NotMapped]
         public Category? Category { get; set; }
+
         public OrganizationFundraise? OrganizationFundraise { get; set; }
         public virtual ICollection<DonateHistory>? DonateHistorys { get; set; }
     }

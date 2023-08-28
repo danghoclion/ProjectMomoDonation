@@ -28,10 +28,9 @@ namespace ProjectMomoDonation.Core.Helper
             foreach (var program in programs)
             {
                 var time = program.DateEnd - program.DateStart;
-                if (program.DateStart == DateTime.Now)
-                    program.Status = StatusProgram.News;
-                if(program.DateEnd == DateTime.Now)
-                    program.Status = StatusProgram.EndTime;
+
+                if (program.DateEnd == DateTime.Now)
+                    program.Status = StatusProgram.End;
                 if (time.Days > 0)
                     program.Status = StatusProgram.Active;
             }
@@ -39,12 +38,10 @@ namespace ProjectMomoDonation.Core.Helper
         }
     }
 
-
     public static class StatusProgram
     {
-        public const string News = "Mới tạo";
         public const string Active = "Đang quyên góp";
-        public const string EndTime = "Kết thúc quyên góp";
-        public const string Close = "Đóng quyên góp";
+        public const string End = "Kết thúc quyên góp";
+        public const string Inactive = "Đóng quyên góp";
     }
 }
