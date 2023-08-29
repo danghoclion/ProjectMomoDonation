@@ -49,5 +49,22 @@ namespace ProjectMomoDonation.API.Controllers
             var program = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.Status == StatusProgram.End);
             return Ok(program.Count());
         }
+
+        [HttpGet]
+        [Route("NumberDonations")]
+        public async Task<IActionResult> GetNumberDonation()
+        {
+            var donate =await unitOfWork.DonateHistoryRepository.GetAllAsync();
+            return Ok(donate.Count());
+        }
+
+        [HttpGet]
+        [Route("TotalMoneyDonate")]
+        public async Task<IActionResult> GetTotalDonate()
+        {
+            var donateHistories =await unitOfWork.DonateHistoryRepository.GetAllAsync();
+            var money = donateHistories.Sum(x => x.Amount);
+            return Ok(money);
+        }
     }
 }
