@@ -76,12 +76,21 @@ namespace ProjectMomoDonation.API.Controllers
         [Route("GetLastest")]
         public async Task<IActionResult> GetLastest([FromQuery] int size)
         {
-            var program = await unitOfWork.ProgramDonation.GetProgramLaster(size);
-            if (program == null)
+            var programs = await unitOfWork.ProgramDonation.GetProgramLaster(size);
+           
+            var listResult = mapper.Map<List<ProgramDonateDTO>>(programs);
+            for (int i = 0; i < listResult.Count; i++)
             {
-                return NotFound();
+                var category = await unitOfWork.CategoryRepository.GetByIdAsync(programs[i].CategoryId);
+                var organition = await unitOfWork.OrganazationFundraise.GetByIdAsync(programs[i].OrganizationFundraiseId);
+                var historyDonation = unitOfWork.DonateHistoryRepository.GetByWhereAsync(x => x.ProgramDonationId == programs[i].Id).Count();
+                listResult[i].CategoryName = category.Name;
+                listResult[i].OrganizationName = organition.Name;
+                listResult[i].OrganizationAvatar = organition.Avatar;
+                listResult[i].CountDonation = historyDonation;
             }
-            return Ok(mapper.Map<List<ProgramDonateDTO>>(program));
+            return Ok(listResult);
+            return Ok(listResult);
         }
 
         [HttpGet]
