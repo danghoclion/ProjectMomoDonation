@@ -143,11 +143,10 @@ namespace ProjectMomoDonation.API.Controllers
             program.Id = id;
             var categoryId = unitOfWork.CategoryRepository.GetByWhereAsync(x => x.Name == programDTO.CategoryName).FirstOrDefault();
             var orgazitionId = unitOfWork.OrganazationFundraise.GetByWhereAsync(x => x.Name == programDTO.OrganizationName).FirstOrDefault();
-            var progranOrigin = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.Id == id).FirstOrDefault();
+            //var programOrigin = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.Id == id).FirstOrDefault();
             program.CategoryId = categoryId.CategoryId;
             program.OrganizationFundraiseId = orgazitionId.OrganizationFundraiseId;
-            program.Status = progranOrigin.Status;
-            
+            //program.Status = "Vừa cập nhật";
 
             var update = await unitOfWork.ProgramDonation.UpdateAsync(program);
 
