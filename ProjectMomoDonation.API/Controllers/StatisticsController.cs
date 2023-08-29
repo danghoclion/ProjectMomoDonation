@@ -1,8 +1,8 @@
-﻿
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectMomoDoanation.Core.Interface;
+using ProjectMomoDonation.API.DTO;
 using ProjectMomoDonation.Core.Helper;
 
 namespace ProjectMomoDonation.API.Controllers
@@ -19,35 +19,21 @@ namespace ProjectMomoDonation.API.Controllers
         }
 
         [HttpGet]
-        [Route("GetTotalProgram")]
-        public async Task<IActionResult> GetTotalProgram()
+        [Route("GetStatistic")]
+        public async Task<IActionResult> GetStatistic()
         {
-            var program = await unitOfWork.ProgramDonation.GetAllAsync();
-            return Ok(program.Count());
-        }
+            var totalProgram = await unitOfWork.ProgramDonation.GetAllAsync();
+            var allDonateHistory = await unitOfWork.DonateHistoryRepository.GetAllAsync();
+            var totalFundraise = allDonateHistory.Sum(x => x.Amount);
+            var totalDonationCount = allDonateHistory.Count();
 
-        [HttpGet]
-        [Route("GetTotalProgramActive")]
-        public async Task<IActionResult> GetTotalProgramActive()
-        {
-            var program = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.Status == StatusProgram.Active);
-            return Ok(program.Count());
-        }
-
-        [HttpGet]
-        [Route("GetTotalProgramInactive")]
-        public async Task<IActionResult> GetTotalProgramInactive()
-        {
-            var program = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.Status == StatusProgram.Inactive);
-            return Ok(program.Count());
-        }
-
-        [HttpGet]
-        [Route("GetTotalProgramClose")]
-        public async Task<IActionResult> GetTotalProgramClose()
-        {
-            var program = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.Status == StatusProgram.End);
-            return Ok(program.Count());
+            var responseDTO = new StatisticDTO()
+            {
+                TotalDonationCount = totalDonationCount,
+                TotalFundraise = totalFundraise,
+                TotalProgram = totalProgram.Count(),
+            };
+            return Ok(responseDTO);
         }
 
         [HttpGet]

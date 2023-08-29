@@ -97,7 +97,11 @@ namespace ProjectMomoDonation.API.Controllers
         [HttpPost]
         [Route("Response")]
         public async Task<IActionResult> RedirectUrlMomo([FromBody]MomoRequest momoRequest)
-        {        
+        {  
+            if(momoRequest.message != "Successful.")
+            {
+                return BadRequest();
+            }
             var data = momoRequest.extraData.Base64Decode();
             JObject result = JObject.Parse(data);
             var userId = userManager.Users.Where(x => x.UserName == result["UserName"].ToString()).FirstOrDefault();
@@ -105,11 +109,13 @@ namespace ProjectMomoDonation.API.Controllers
             {
                 Id = userId.Id,
                 ProgramDonationId = int.Parse(result["ProgramId"].ToString()),
-                Amount = decimal.Parse(result["AmountDonate"].ToString())
+                Amount = decimal.Parse(result["AmountDonate"].ToString()),
+                Time = DateTime.Now
             };
             await unitOfWork.DonateHistoryRepository.CreateAsync(donateHistory);
             var program = await unitOfWork.ProgramDonation.GetByIdAsync(donateHistory.ProgramDonationId);
             program.TotalDonate += donateHistory.Amount;
+            unitOfWork.SaveChange();
             return Ok();
         }
     }
