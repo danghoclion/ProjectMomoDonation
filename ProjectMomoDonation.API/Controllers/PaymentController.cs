@@ -36,7 +36,8 @@ namespace ProjectMomoDonation.API.Controllers
                 { "ProgramId", programId },
                 { "AmountDonate", money }
             };
-        
+
+            var test = extra["UserName"];
             string extraData = extra.ToString().Base64Encode();
 
             //Before sign HMAC SHA256 signature
