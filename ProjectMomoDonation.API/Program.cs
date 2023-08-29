@@ -9,7 +9,9 @@ using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.API.Mapings;
 using ProjectMomoDonation.API.ValidateHelper;
 using ProjectMomoDonation.Core.Data;
+using ProjectMomoDonation.Core.Models;
 using ProjectMomoDonation.Core.UnitOfWork;
+using System;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,6 +65,9 @@ builder.Services.AddIdentityCore<IdentityUser>()
     .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("NZWalks")
     .AddEntityFrameworkStores<MomoDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddIdentity<MomoUser, IdentityRole>()
+        .AddEntityFrameworkStores<MomoDbContext>();
 
 builder.Services.Configure<IdentityOptions>(option =>
 {

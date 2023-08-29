@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectMomoDonation.Core.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace ProjectMomoDoanation.Core.Interface
 
         IDonateHistoryRepository DonateHistoryRepository { get; }
 
-        //IMomoUserRepository MomoUserRepository { get; }
+        IMomoUserRepository MomoUserRepository { get; }
         IOrganazationFundraiseRepository OrganazationFundraise { get; }
 
         IProgramDonationRepository ProgramDonation { get; }

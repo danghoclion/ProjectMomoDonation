@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.API.DTO;
+using ProjectMomoDonation.Core.Models;
 
 namespace ProjectMomoDonation.API.Controllers
 {
@@ -23,11 +24,11 @@ namespace ProjectMomoDonation.API.Controllers
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDTO registerRequestDto)
         {
-            var identityUser = new IdentityUser
+            var identityUser = new MomoUser
             {
                 UserName = registerRequestDto.Username,
                 Email = registerRequestDto.Username,
-            };
+            };  
 
             var result = await userManager.CreateAsync(identityUser, registerRequestDto.Password);
 

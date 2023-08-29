@@ -1,6 +1,8 @@
 ﻿using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDoanation.Core.Repository;
 using ProjectMomoDonation.Core.Data;
+using ProjectMomoDonation.Core.Interface;
+using ProjectMomoDonation.Core.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ namespace ProjectMomoDonation.Core.UnitOfWork
         private readonly MomoDbContext context;
         private ICategoryRepository categoryRepository;
         private IDonateHistoryRepository donateHistoryRepository;
-        //private IMomoUserRepository momoUserRepository;
+        private IMomoUserRepository momoUserRepository;
         private IOrganazationFundraiseRepository organazationFundraise;
         private IProgramDonationRepository programDonation;
 
@@ -43,15 +45,15 @@ namespace ProjectMomoDonation.Core.UnitOfWork
                 return donateHistoryRepository;
             }
         }
-        //public IMomoUserRepository MomoUserRepository
-        //{
-        //    get
-        //    {
-        //        if (momoUserRepository == null)
-        //            momoUserRepository = new MomoUserRepository(context);
-        //        return momoUserRepository;
-        //    }
-        //}
+        public IMomoUserRepository MomoUserRepository
+        {
+            get
+            {
+                if (momoUserRepository == null)
+                    momoUserRepository = new MomoUserRepository(context);
+                return momoUserRepository;
+            }
+        }
         public IOrganazationFundraiseRepository OrganazationFundraise
         {
             get
