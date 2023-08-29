@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.API.MomoPayment;
 using ProjectMomoDonation.Core.Helper;
 using ProjectMomoDonation.Core.Models;
@@ -13,6 +15,14 @@ namespace ProjectMomoDonation.API.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly IUnitOfWork unitOfWork;
+
+        public PaymentController(UserManager<IdentityUser> userManager, IUnitOfWork unitOfWork)
+        {
+            this.userManager = userManager;
+            this.unitOfWork = unitOfWork;
+        }
         [HttpPost]
         public async Task<IActionResult> CreatePayment([FromQuery] string money, string userName, string programId, string urlRedirect)
         {
@@ -37,7 +47,6 @@ namespace ProjectMomoDonation.API.Controllers
                 { "AmountDonate", money }
             };
 
-            var test = extra["UserName"];
             string extraData = extra.ToString().Base64Encode();
 
             //Before sign HMAC SHA256 signature
@@ -88,11 +97,19 @@ namespace ProjectMomoDonation.API.Controllers
         [HttpPost]
         [Route("Response")]
         public async Task<IActionResult> RedirectUrlMomo([FromBody]MomoRequest momoRequest)
-        {
-            JObject keyValuePairs = JObject.Parse(momoRequest.extraData);
+        {        
             var data = momoRequest.extraData.Base64Decode();
-            var a = keyValuePairs["UserName"];
-            DonateHistory history = new DonateHistory();
+            JObject result = JObject.Parse(data);
+            var userId = userManager.Users.Where(x => x.UserName == result["UserName"].ToString()).FirstOrDefault();
+            DonateHistory donateHistory = new DonateHistory()
+            {
+                Id = userId.Id,
+                ProgramDonationId = int.Parse(result["ProgramId"].ToString()),
+                Amount = decimal.Parse(result["AmountDonate"].ToString())
+            };
+            await unitOfWork.DonateHistoryRepository.CreateAsync(donateHistory);
+            var program = await unitOfWork.ProgramDonation.GetByIdAsync(donateHistory.ProgramDonationId);
+            program.TotalDonate += donateHistory.Amount;
             return Ok();
         }
     }
