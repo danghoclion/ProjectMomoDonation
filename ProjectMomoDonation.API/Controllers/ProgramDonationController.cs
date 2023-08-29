@@ -146,7 +146,7 @@ namespace ProjectMomoDonation.API.Controllers
             //var programOrigin = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.Id == id).FirstOrDefault();
             program.CategoryId = categoryId.CategoryId;
             program.OrganizationFundraiseId = orgazitionId.OrganizationFundraiseId;
-            //program.Status = "Vừa cập nhật";
+            program.Status = "Vừa cập nhật";
 
             var update = await unitOfWork.ProgramDonation.UpdateAsync(program);
 
