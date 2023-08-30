@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectMomoDonation.Core", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectMomoDonation.API", "ProjectMomoDonation.API\ProjectMomoDonation.API.csproj", "{A5B7C5F0-246A-4600-B741-1CA2C2F1771E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectMomoDonation.UnitTest", "ProjectMomoDonation.UnitTest\ProjectMomoDonation.UnitTest.csproj", "{1343FF2E-1CA7-4763-A082-D54B1D2C9F26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A5B7C5F0-246A-4600-B741-1CA2C2F1771E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5B7C5F0-246A-4600-B741-1CA2C2F1771E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5B7C5F0-246A-4600-B741-1CA2C2F1771E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1343FF2E-1CA7-4763-A082-D54B1D2C9F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1343FF2E-1CA7-4763-A082-D54B1D2C9F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1343FF2E-1CA7-4763-A082-D54B1D2C9F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1343FF2E-1CA7-4763-A082-D54B1D2C9F26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

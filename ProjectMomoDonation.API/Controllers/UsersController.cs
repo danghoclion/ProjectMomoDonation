@@ -33,6 +33,7 @@ namespace ProjectMomoDonation.API.Controllers
         }
 
         [HttpPost]
+        [Route("Block")]
         public async Task<IActionResult> BlockUser(string userName)
         {
             var user = unitOfWork.MomoUserRepository.GetByWhereAsync(x => x.UserName == userName).FirstOrDefault();
