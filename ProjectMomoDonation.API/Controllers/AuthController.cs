@@ -88,7 +88,7 @@ namespace ProjectMomoDonation.API.Controllers
                 var changePasswordResult = await userManager.ChangePasswordAsync(user, model.oldPassword, model.newPassword);
                 if (changePasswordResult.Succeeded)
                 {
-                    return Ok("Change password successful!");
+                    return Ok();
                 }
             }
             return BadRequest();
