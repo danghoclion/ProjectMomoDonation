@@ -9,6 +9,8 @@ using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.API.Mapings;
 using ProjectMomoDonation.API.ValidateHelper;
 using ProjectMomoDonation.Core.Data;
+using ProjectMomoDonation.Core.Helper;
+using ProjectMomoDonation.Core.Interface;
 using ProjectMomoDonation.Core.Models;
 using ProjectMomoDonation.Core.UnitOfWork;
 using System;
@@ -56,6 +58,7 @@ option.UseSqlServer(builder.Configuration.GetConnectionString("NZWalk")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 builder.Services.AddHttpContextAccessor();
