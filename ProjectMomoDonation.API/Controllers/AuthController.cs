@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectMomoDoanation.Core.Interface;
 using ProjectMomoDonation.API.DTO;
 using ProjectMomoDonation.Core.Models;
+using System.Net.Mail;
+using System.Net;
+using ProjectMomoDonation.Core.Interface;
 
 namespace ProjectMomoDonation.API.Controllers
 {
@@ -13,11 +16,13 @@ namespace ProjectMomoDonation.API.Controllers
     {
         private readonly UserManager<MomoUser> userManager;
         private readonly ITokenRepository tokenRepository;
+        private readonly IEmailSender emailSender;
 
-        public AuthController(UserManager<MomoUser> userManager, ITokenRepository tokenRepository)
+        public AuthController(UserManager<MomoUser> userManager, ITokenRepository tokenRepository, IEmailSender emailSender)
         {
             this.userManager = userManager;
             this.tokenRepository = tokenRepository;
+            this.emailSender = emailSender;
         }
 
         [HttpPost]
@@ -96,8 +101,22 @@ namespace ProjectMomoDonation.API.Controllers
 
         [HttpPost]
         [Route("ForgotPassword")]
-        public async Task<IActionResult> ForgotPassword()
+        public async Task<IActionResult> ForgotPassword([FromQuery] string email)
         {
+            var user = userManager.Users.Where(u => u.Email == email).FirstOrDefault();
+            string newPassword = "123abc";
+            string newHashPassword = userManager.PasswordHasher.HashPassword(user, newPassword);
+            user.PasswordHash = newHashPassword;
+            var updateResult = await userManager.UpdateAsync(user);
+
+            if (!updateResult.Succeeded)
+            {
+                throw new Exception("Erorr");
+            }
+            string subject = "Forgot password from Donation Momo with love";
+            string body = "This is your new password " + newPassword;
+            await emailSender.SendEmailAsyn(email, subject, body);
+
             return Ok();
         }
     }
