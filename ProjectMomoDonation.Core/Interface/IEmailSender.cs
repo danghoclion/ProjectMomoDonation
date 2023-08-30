@@ -8,6 +8,6 @@ namespace ProjectMomoDonation.Core.Interface
 {
     public interface IEmailSender
     {
-        Task SendEmailAsyn(string email, string subject, string messsage);
+        Task SendEmailAsync(string email, string subject, string messsage);
     }
 }

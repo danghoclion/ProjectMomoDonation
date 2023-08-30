@@ -11,7 +11,7 @@ namespace ProjectMomoDonation.Core.Helper
 {
     public class EmailSender : IEmailSender
     {
-        public Task SendEmailAsyn(string email, string subject, string messsage)
+        public Task SendEmailAsync(string email, string subject, string messsage)
         {
             var mail = "ledanghoc1102@gmail.com";
             var pwd = "ouddzrrprmkaqtge";

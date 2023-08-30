@@ -104,6 +104,7 @@ namespace ProjectMomoDonation.API.Controllers
         public async Task<IActionResult> ForgotPassword([FromQuery] string email)
         {
             var user = userManager.Users.Where(u => u.Email == email).FirstOrDefault();
+            if (user == null) { return BadRequest(); }
             string newPassword = "123abc";
             string newHashPassword = userManager.PasswordHasher.HashPassword(user, newPassword);
             user.PasswordHash = newHashPassword;
@@ -111,11 +112,11 @@ namespace ProjectMomoDonation.API.Controllers
 
             if (!updateResult.Succeeded)
             {
-                throw new Exception("Erorr");
+                throw new Exception("Error");
             }
             string subject = "Forgot password from Donation Momo with love";
-            string body = "This is your new password " + newPassword;
-            await emailSender.SendEmailAsyn(email, subject, body);
+            string body = $"This is your new password: {newPassword}";
+            await emailSender.SendEmailAsync(email, subject, body);
 
             return Ok();
         }
