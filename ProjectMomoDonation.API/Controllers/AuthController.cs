@@ -11,10 +11,10 @@ namespace ProjectMomoDonation.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<MomoUser> userManager;
         private readonly ITokenRepository tokenRepository;
 
-        public AuthController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository)
+        public AuthController(UserManager<MomoUser> userManager, ITokenRepository tokenRepository)
         {
             this.userManager = userManager;
             this.tokenRepository = tokenRepository;
@@ -28,7 +28,7 @@ namespace ProjectMomoDonation.API.Controllers
             {
                 UserName = registerRequestDto.Username,
                 Email = registerRequestDto.Username,
-            };  
+            };
 
             var result = await userManager.CreateAsync(identityUser, registerRequestDto.Password);
 
@@ -68,7 +68,7 @@ namespace ProjectMomoDonation.API.Controllers
                             JwtToken = token,
                             Name = loginRequest.Username,
                             RoleName = roles.ToList(),
-                            Status = "Susscess"
+                            Status = user.Status
                         };
                         return Ok(response);
                     }
@@ -76,6 +76,29 @@ namespace ProjectMomoDonation.API.Controllers
             }
 
             return BadRequest("Username or password incorrect");
+        }
+
+        [HttpPut]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDTO model)
+        {
+            var user = await userManager.FindByEmailAsync(model.userName);
+            if (user != null)
+            {
+                var changePasswordResult = await userManager.ChangePasswordAsync(user, model.oldPassword, model.newPassword);
+                if (changePasswordResult.Succeeded)
+                {
+                    return Ok("Change password successful!");
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword()
+        {
+            return Ok();
         }
     }
 }

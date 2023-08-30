@@ -15,14 +15,15 @@ namespace ProjectMomoDonation.API.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<MomoUser> userManager;
         private readonly IUnitOfWork unitOfWork;
 
-        public PaymentController(UserManager<IdentityUser> userManager, IUnitOfWork unitOfWork)
+        public PaymentController(UserManager<MomoUser> userManager, IUnitOfWork unitOfWork)
         {
             this.userManager = userManager;
             this.unitOfWork = unitOfWork;
         }
+
         [HttpPost]
         public async Task<IActionResult> CreatePayment([FromQuery] string money, string userName, string programId, string urlRedirect)
         {
@@ -85,7 +86,6 @@ namespace ProjectMomoDonation.API.Controllers
                 { "extraData", extraData },
                 { "requestType", requestType },
                 { "signature", signature }
-
             };
             //log.Debug("Json request to MoMo: " + message.ToString());
             string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
@@ -96,15 +96,19 @@ namespace ProjectMomoDonation.API.Controllers
 
         [HttpPost]
         [Route("Response")]
-        public async Task<IActionResult> RedirectUrlMomo([FromBody]MomoRequest momoRequest)
-        {  
-            if(momoRequest.message != "Successful.")
+        public async Task<IActionResult> RedirectUrlMomo([FromBody] MomoRequest momoRequest)
+        {
+            if (momoRequest.message != "Successful.")
             {
                 return BadRequest();
             }
             var data = momoRequest.extraData.Base64Decode();
             JObject result = JObject.Parse(data);
             var userId = userManager.Users.Where(x => x.UserName == result["UserName"].ToString()).FirstOrDefault();
+            if (userId == null)
+            {
+                userId = userManager.Users.Where(x => x.UserName == "anonymous@system.com").FirstOrDefault();
+            }
             DonateHistory donateHistory = new DonateHistory()
             {
                 Id = userId.Id,

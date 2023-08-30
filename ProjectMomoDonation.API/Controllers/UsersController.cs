@@ -17,6 +17,7 @@ namespace ProjectMomoDonation.API.Controllers
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly List<string> systemAccount = new List<string>() { "admin@gmail.com", "anonymous@system.com" };
 
         public UsersController(IUnitOfWork unitOfWork, IMapper mapper, UserManager<IdentityUser> userManager)
         {
@@ -28,15 +29,16 @@ namespace ProjectMomoDonation.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetALL()
         {
-            var users =await unitOfWork.MomoUserRepository.GetAllAsync();
-            return Ok(users);
+            var users = await unitOfWork.MomoUserRepository.GetAllAsync();
+            users.RemoveAll(user => systemAccount.Any(accountUser => accountUser == user.UserName));
+            return Ok(mapper.Map<List<UserDTO>>(users));
         }
 
         [HttpPost]
-        public async Task<IActionResult> BlockUser(string userName)
+        public async Task<IActionResult> SetUserStatus(string userName, string status)
         {
             var user = unitOfWork.MomoUserRepository.GetByWhereAsync(x => x.UserName == userName).FirstOrDefault();
-            user.Status = "Block";
+            user.Status = status;
             unitOfWork.SaveChange();
             return Ok();
         }

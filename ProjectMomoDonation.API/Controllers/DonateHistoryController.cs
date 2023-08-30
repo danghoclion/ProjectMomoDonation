@@ -44,6 +44,10 @@ namespace ProjectMomoDonation.API.Controllers
                 result[i].NameProgram = temp.ShortTitle;
                 var user = await userManager.FindByIdAsync(donateHistories[i].Id);
                 result[i].UserName = user.UserName;
+                if (user.UserName == "anonymous@system.com")
+                {
+                    result[i].UserName = "Nhà hảo tâm ẩn danh";
+                }
             }
             return Ok(result);
         }
