@@ -1,0 +1,18 @@
+.donation-item.main-donation-program:hover .dn-title.main-donation-program {
+  color: black;
+}
+
+.text-finish.main-donation-program {
+  color: #7eb54a;
+}
+
+.dn-progress.main-donation-program .bg-finish {
+  background-color: #7eb54a;
+}
+.main-donation-program > .dn-progress-bar {
+  background-color: #f45197;
+}
+.main-donation-program :hover{
+  border-style: outset;
+}
+

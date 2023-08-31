@@ -1,0 +1,110 @@
+<app-admin-nav-bar></app-admin-nav-bar>
+<div class="container">
+
+<div class="row">
+<h2>Thêm Mới Quỹ Từ Thiện</h2>
+
+<form #form="ngForm" (ngSubmit)="onModelCreating()">
+    <label class="form-label" for="username"
+      >Tên quỹ</label
+    >
+
+    <div class="form-outline mb-4">
+      <input 
+      type="text"
+      id="name"
+      class="form-control"
+      placeholder="Nhập tên quỹ"
+      [(ngModel)]="model.name"
+      name="name" 
+    />
+
+    </div>
+    <label class="form-label" for="form2Example22"
+      >Tên ngắn gọn</label
+    >
+    <div class="form-outline mb-4">
+      <input
+      type="text"
+      id="shortName"
+      class="form-control"
+      placeholder="Nhập mật khẩu"
+      [(ngModel)]="model.shortName"
+      name="shortName"
+      />
+    </div>
+    <label class="form-label" for="repassword">Mô tả</label>
+    <div class="form-outline mb-4">
+      <input
+        type="text"
+        id="description"
+        class="form-control"
+        placeholder="Nhập mô tả"
+        [(ngModel)]="model.description"
+        name="description"
+        
+      />
+    </div>
+    <label class="form-label" for="repassword">Avatar</label>
+    <div class="form-outline mb-4">
+      <input
+        type="text"
+        id="avatar"
+        class="form-control"
+        placeholder="Nhập đường dẫn tới avatar"
+        [(ngModel)]="model.avatar"
+        name="avatar"
+        
+      />
+    </div>
+    <label class="form-label" for="image">Ảnh dự án</label>
+    <div class="form-outline mb-4">
+      <input
+        type="text"
+        id="image"
+        class="form-control"
+        placeholder="Nhập đường dẫn tới ảnh dự án"
+        [(ngModel)]="model.image"
+        name="image"
+      />
+    </div>
+    <div class="row ">
+      <div class="col-3 border pb-2">
+        <h3>Xem Trước Avatar</h3>
+        <img src="{{model.avatar}}"></div>
+      
+      <div class="col-3 border pb-2">
+        <h3>Xem Trước Ảnh Dự Án</h3>
+        <img src="{{model.image}}" ></div>
+    </div>
+    <label class="form-label" for="urlSlug">URL Slug</label>
+    <div class="form-outline mb-4">
+      <input
+        type="text"
+        id="urlSlug"
+        class="form-control"
+        placeholder="Nhập URL Slug"
+        [(ngModel)]="model.urlSlug"
+        name="urlSlug"
+        
+      />
+    </div>
+    <div class="text-center row pt-1 mb-2 pb-1">
+      <button
+        class="btn col-12"
+        type="submit"
+      >
+         Tạo mới
+      </button>
+      
+    </div>
+
+    <div
+    class="d-flex align-items-center justify-content-center pb-4"
+  >
+    <a class="text-red-600" routerLink="/admin/organization"
+    routerLinkActive="active">Quay về Danh sách</a>
+  </div>
+  </form>
+</div>
+</div>

@@ -1,0 +1,26 @@
+<div
+  class="border-t border-gray-300 pt-3 md:pt-0 lg:border-t-0 lg:border-l lg:pl-6"
+>
+  <h2 class="h3 mb-4 flex items-center text-xl font-bold text-momo">
+    Hoàn cảnh quyên góp mới nhất
+  </h2>
+  <div>
+    <div></div>
+    <swiper-container
+      #swiper
+      [slidesPerView]="1"
+      [initialSlide]="1"
+      [pagination]="{ clickable: true, dynamicBullets: true }"
+      [spaceBetween]="50"
+      [autoplay]="true"
+      autoplay-delay="5000"
+      autoplay-disable-on-interaction="false"
+    >
+      <swiper-slide *ngFor="let program of lastestDonationProgram">
+        <app-main-donation-program-item
+          [donationProgram]="program"
+        ></app-main-donation-program-item>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+</div>

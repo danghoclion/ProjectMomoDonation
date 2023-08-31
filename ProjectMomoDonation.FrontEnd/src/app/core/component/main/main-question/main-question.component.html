@@ -1,0 +1,55 @@
+<div
+  class="py-8 md:py-10 lg:py-14 landing:bg-transparent bg-white"
+  style="--grad-rgb-color: 255 255 255"
+>
+  <div class="mx-auto w-full max-w-6xl px-5 md:px-8 lg:px-8">
+    <div
+      class="landing-fadeUp-child grid grid-cols-1 landing:rounded-xl landing:border landing:border-lpSecondary landing:bg-lpSecondary/30 landing:p-5 md:grid-cols-3 md:gap-6 md:landing:mx-auto md:landing:grid-cols-6 md:landing:px-8"
+      id="section-question"
+    >
+      <div class="landing:col-span-6">
+        <div
+          class="mb-5 text-center md:mt-5 md:text-left md:landing:text-center"
+        >
+          <h2
+            class="text-2xl font-bold landing:text-lpTitle lg:text-3xl text-pink-600"
+          >
+            Câu hỏi thường gặp
+          </h2>
+        </div>
+      </div>
+      <div
+        class="sm:landing:col-span-6 md:col-span-2 md:pl-5 md:landing:pl-0 lg:landing:col-span-4 lg:landing:col-start-2"
+      >
+        <div
+          class="article-question divide-y divide-gray-200"
+          data-reach-accordion=""
+        >
+          <div
+            class="block landing:!border-gray-400/40 landing:text-lpText"
+            *ngFor="let item of accordionItems"
+          >
+            <button
+              (click)="toggleAccordion(item)"
+              [attr.aria-controls]="'panel---' + item.id"
+              [attr.aria-expanded]="item.expanded ? 'true' : 'false'"
+              class="question-title relative block w-full cursor-pointer py-3 pl-0 pr-6 text-left font-semibold text-pine-500 hover:text-opacity-70 focus:outline-none landing:text-lpText landing:hover:text-lpActive md:py-4 text-lg"
+            >
+              <div class="question">{{ item.question }}</div>
+              <!-- ... -->
+            </button>
+            <div
+              role="region"
+              [attr.aria-labelledby]="'button---' + item.id"
+              [style.maxHeight]="item.expanded ? panelMaxHeight : '0px'"
+              [style.visibility]="item.expanded ? 'visible' : 'hidden'"
+              class="soju__prose small pb-5 text-base text-gray-600 landing:text-lpText/90"
+            >
+              {{ item.answer }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

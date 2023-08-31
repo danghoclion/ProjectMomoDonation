@@ -1,0 +1,73 @@
+<app-admin-nav-bar></app-admin-nav-bar>
+<div class="mt-6 row justify-center">
+  <input
+    class="border col-6"
+    type="text"
+    [(ngModel)]="userSearch"
+    id="userSearch"
+    placeholder="Tìm kiếm theo tên đăng nhập"
+    name="userSearch"
+    style="height: 100%; font-size: larger"
+    (input)="userSearching()"
+  />
+</div>
+
+<mat-sidenav-container fxFlex="0 1 auto">
+  <mat-sidenav
+    #sidenav
+    position="start"
+    mode="side"
+    opened="false"
+    class="width-30 p-6"
+  >
+    SIDENAV CONTENT HERE
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="mat-elevation-z8">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="example-table">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+          </ng-container>
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef>Tên đăng nhập</th>
+            <td mat-cell *matCellDef="let row">{{ row.userName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Trạng Thái</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-form-field>
+                <mat-select [(ngModel)]="row.status" name="status">
+                  <mat-option
+                    (click)="SetUserStatus(row.userName, row.status)"
+                    value="Blocked"
+                  >
+                    Chặn người dùng
+                  </mat-option>
+                  <mat-option
+                    (click)="SetUserStatus(row.userName, row.status)"
+                    value="Actived"
+                  >
+                    Bình thường
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <div>
+          <mat-paginator
+            #paginator
+            [pageSize]="5"
+            [pageSizeOptions]="[5, 10, 20]"
+            showFirstLastButtons
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

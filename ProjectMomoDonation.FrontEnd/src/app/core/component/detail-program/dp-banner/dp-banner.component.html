@@ -1,0 +1,238 @@
+<div class="mx-auto w-full max-w-6xl px-5 md:px-12 lg:px-12">
+  <div
+    class="grid scroll-m-28 grid-cols-12 gap-5 md:gap-x-10 md:gap-y-7"
+    id="hoancanh"
+  >
+    <div class="order-2 col-span-12 md:order-1">
+      <div>
+        <h1
+          class="mb-3 text-xl font-bold leading-tight text-gray-700 md:pt-6 md:text-2xl md:leading-snug lg:text-3xl"
+        >
+          {{ donationProgram.shortTitle }}
+        </h1>
+        <p class="leading-normal text-gray-500 md:text-lg">
+          ❤️&nbsp;{{ donationProgram.title }}
+        </p>
+        <div class="mt-2 flex items-center">
+          <div
+            class="flex flex-1 flex-col flex-wrap text-sm text-gray-500 md:flex-row md:items-center"
+          >
+            <span class="relative">{{
+              donationProgram.dateStart | date : "dd/MM/yyyy"
+            }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="order-2 col-span-12 md:order-2 md:col-span-6 lg:col-span-8">
+      <img [src]="donationProgram.avatarUrl" />
+    </div>
+    <div
+      class="order-3 col-span-12 md:order-3 md:col-span-6 md:block lg:col-span-4"
+    >
+      <div class="col-span-12 md:col-span-6 lg:col-span-4">
+        <div class="mb-3 flex items-center justify-between sm:mb-4 md:-mt-2">
+          <div class="text-sm font-bold uppercase tracking-wide text-pink-600">
+            Thông tin quyên góp
+          </div>
+          <div class="text-left">
+            <div class="jsx-ea51e03070354ffb relative">
+              <button
+                aria-haspopup="true"
+                aria-controls="menu--5"
+                class="button-share"
+                id="menu-button--menu--5"
+                type="button"
+                data-reach-menu-button=""
+              >
+                <div
+                  class="jsx-ea51e03070354ffb button-share-bg flex items-center space-x-1 rounded-3xl border border-gray-200 bg-white py-1 pl-2.5 pr-3 text-md text-gray-600 drop-shadow-sm hover:bg-gray-100 hover:text-gray-800 focus:bg-gray-100 focus:text-gray-800"
+                >
+                  <span class="jsx-ea51e03070354ffb">Chia sẻ</span
+                  ><svg
+                    width="24px"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    class="jsx-ea51e03070354ffb h-4 w-4"
+                  >
+                    <g class="jsx-ea51e03070354ffb">
+                      <path
+                        fill="none"
+                        d="M0 0h24v24H0z"
+                        class="jsx-ea51e03070354ffb"
+                      ></path>
+                      <path
+                        d="M13 14h-2a8.999 8.999 0 0 0-7.968 4.81A10.136 10.136 0 0 1 3 18C3 12.477 7.477 8 13 8V3l10 8-10 8v-5z"
+                        class="jsx-ea51e03070354ffb"
+                      ></path>
+                    </g>
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="grid grid-cols-1 gap-y-3 rounded-lg border border-gray-200 bg-gray-50 p-3 md:gap-y-4"
+        >
+          <div class="flex items-center space-x-3">
+            <div class="h-9 w-9 shrink-0">
+              <img
+                src="https://homepage.momocdn.net/img/momo-upload-api-221117005051-638042430517274856.png"
+                loading="lazy"
+                alt=""
+              />
+            </div>
+            <div class="min-w-0 flex-auto">
+              <div class="text-sm">Đồng hành cùng dự án</div>
+              <div class="truncate text-xs text-gray-500">
+                Siêu ứng dụng số 1 Việt Nam
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3">
+            <div class="relative h-9 w-9 shrink-0">
+              <span
+                style="
+                  box-sizing: border-box;
+                  display: block;
+                  overflow: hidden;
+                  width: initial;
+                  height: initial;
+                  background: none;
+                  opacity: 1;
+                  border: 0px;
+                  margin: 0px;
+                  padding: 0px;
+                  position: absolute;
+                  inset: 0px;
+                "
+                ><img
+                  [alt]="donationProgram.title"
+                  [src]="donationProgram.organizationAvatar"
+                  decoding="async"
+                  data-nimg="fill"
+                  style="
+                    position: absolute;
+                    inset: 0px;
+                    box-sizing: border-box;
+                    padding: 0px;
+                    border: none;
+                    margin: auto;
+                    display: block;
+                    width: 0px;
+                    height: 0px;
+                    min-width: 100%;
+                    max-width: 100%;
+                    min-height: 100%;
+                    max-height: 100%;
+                    object-fit: contain;
+                  "
+              /></span>
+            </div>
+            <div class="relative min-w-0 flex-auto">
+              <div class="text-sm">Đồng hành cùng dự án</div>
+              <div class="flex-1 text-md leading-4 text-gray-600">
+                <div class="truncate text-xs text-gray-500">
+                  {{ donationProgram.organizationName }}
+                </div>
+                <a [routerLink]="'/doi-tac-dong-hanh'" routerLinkActive="active"
+                  ><small class="mt-1 block text-blue-500"
+                    ><i>Tìm hiểu thêm &gt;&gt;</i></small
+                  ></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 sm:mt-6">
+          <div class="jsx-c5fd4b6feeb6dfd6 dn-detail">
+            <div class="jsx-c5fd4b6feeb6dfd6 dn-info mb-2 flex items-end">
+              <strong
+                class="jsx-c5fd4b6feeb6dfd6 item-end dn-value flex text-xl font-bold text-gray-700"
+                >{{ donationProgram.totalDonate }} VND</strong
+              ><span
+                class="jsx-c5fd4b6feeb6dfd6 flex items-end pl-2 text-sm text-gray-500"
+                >quyên góp / {{ donationProgram.donationGoal }} VND</span
+              >
+            </div>
+            <div
+              class="main-donation-program dn-progress my-1 flex h-1.5 w-full overflow-hidden rounded-lg bg-gray-200"
+            >
+              <div
+                class="dn-progress-bar h-1.5 rounded-lg bg-momo"
+                [style.width]="progressWidth"
+              ></div>
+            </div>
+            <div
+              class="jsx-c5fd4b6feeb6dfd6 dn-time mt-2 flex items-start justify-between text-sm text-gray-400"
+            >
+              <div class="jsx-c5fd4b6feeb6dfd6">
+                <h4 class="jsx-c5fd4b6feeb6dfd6 text-gray-400">
+                  Lượt quyên góp
+                </h4>
+                <p
+                  class="jsx-c5fd4b6feeb6dfd6 text-base font-bold text-gray-900"
+                >
+                  {{ donationProgram.countDonation }} lượt
+                </p>
+              </div>
+              <div class="jsx-c5fd4b6feeb6dfd6">
+                <h4 class="jsx-c5fd4b6feeb6dfd6 text-gray-400">Đạt được</h4>
+                <p
+                  class="jsx-c5fd4b6feeb6dfd6 text-base font-bold text-gray-900"
+                >
+                  {{ progressWidth }}
+                </p>
+              </div>
+              <div class="jsx-c5fd4b6feeb6dfd6">
+                <h4>Thời hạn còn</h4>
+                <p class="text-base font-bold text-gray-900">
+                  {{ daysLeft }} ngày
+                </p>
+              </div>
+            </div>
+            <div class="jsx-c5fd4b6feeb6dfd6 mt-6 space-y-3">
+              <div
+                class="qrtype-2190 row md:flex md:items-center"
+                data-qr-id="2190"
+              >
+                <button
+                  (click)="toggleAccordion()"
+                  [attr.aria-expanded]="expanded ? 'true' : 'false'"
+                  class="flex h-7 items-center justify-center rounded-md px-3 border text-pink-600 text-lg font-bold"
+                >
+                  <div class="question">Quyên góp</div>
+                  <!-- ... -->
+                </button>
+                <div
+                  role="region"
+                  [style.maxHeight]="expanded ? panelMaxHeight : '0px'"
+                  [style.visibility]="expanded ? 'visible' : 'hidden'"
+                  class="col-12 mt-2"
+                >
+                  <form #form="ngForm" (ngSubmit)="onConfirm()">
+                    <ng-container *ngIf="donateRequest">
+                      <input
+                        class="col-12 border"
+                        name="money"
+                        placeholder="Nhập số tiền bạn muốn quyên góp"
+                        [(ngModel)]="donateRequest.money"
+                      />
+                    </ng-container>
+                    <button type="submit" class="btn-primary col-12 mt-6 mb-2">
+                      Xác Nhận
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script></script>

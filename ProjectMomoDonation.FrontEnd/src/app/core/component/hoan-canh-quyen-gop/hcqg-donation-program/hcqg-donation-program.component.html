@@ -1,0 +1,57 @@
+<div
+  class="py-4 md:py-10 lg:py-14 landing:bg-transparent bg-gray-50"
+  style="--grad-rgb-color: 250 250 250"
+>
+  <div class="mx-auto w-full max-w-6xl px-5 md:px-8 lg:px-8">
+    <div class="mb-5 text-center md:mb-8" id="section-article">
+      
+      <app-hcqg-category-filter></app-hcqg-category-filter>
+      <div class="mb-6 row justify-center">
+        <input
+          class="border col-9"
+          type="text"
+          [(ngModel)]="titleSearch"
+          id="userSearch"
+          placeholder="Tìm kiếm theo tiêu đề"
+          name="userSearch"
+          style="height: 100%; font-size: larger"
+          (input)="DataFiltering()"
+        />
+      </div>
+      <div>
+        <swiper-container
+          [initialSlide]="1"
+          [pagination]="{ clickable: true, type: 'progressbar' }"
+          [spaceBetween]="50"
+          [breakpoints]="breakpoints"
+        >
+          <ng-container
+            *ngFor="
+              let donationProgram of allDonationProgram;
+              index as i;
+              count as count
+            "
+          >
+            <ng-container *ngIf="i * 2 + 1 < count">
+              <swiper-slide>
+                <app-main-donation-program-item
+                  [donationProgram]="allDonationProgram[i * 2]"
+                ></app-main-donation-program-item>
+                <app-main-donation-program-item
+                  [donationProgram]="allDonationProgram[i * 2 + 1]"
+                ></app-main-donation-program-item>
+              </swiper-slide>
+            </ng-container>
+            <ng-container *ngIf="i * 2 + 1 === count">
+              <swiper-slide>
+                <app-main-donation-program-item
+                  [donationProgram]="allDonationProgram[i * 2]"
+                ></app-main-donation-program-item>
+              </swiper-slide>
+            </ng-container>
+          </ng-container>
+        </swiper-container>
+      </div>
+    </div>
+  </div>
+</div>

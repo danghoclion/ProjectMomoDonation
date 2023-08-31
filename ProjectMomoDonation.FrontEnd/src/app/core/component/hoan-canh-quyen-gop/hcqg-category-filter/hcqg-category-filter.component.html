@@ -1,0 +1,27 @@
+<swiper-container
+  class="border-y-2 mb-4"
+  [breakpoints]="breakpoints"
+  navigation="true"
+>
+  <ng-container *ngFor="let category of allCategory; index as i">
+    <swiper-slide *ngIf="i === 0">
+      <a
+        class="block my-8 link-hover"
+        [routerLink]="['/hoan-canh-quyen-gop']"
+        routerLinkActive="active"
+        aria-current="page"
+        >Tất cả</a
+      >
+    </swiper-slide>
+    <swiper-slide>
+      <a
+        class="block my-8 link-hover"
+        [routerLink]="['/hoan-canh-quyen-gop', category.categoryId]"
+        routerLinkActive="active"
+        [class.link-selected]="category.categoryId === selectedCategoryId"
+        aria-current="page"
+        >{{ category.name }}</a
+      >
+    </swiper-slide>
+  </ng-container>
+</swiper-container>
