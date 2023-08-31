@@ -121,10 +121,11 @@ namespace ProjectMomoDonation.API.Controllers
             var program = mapper.Map<ProgramDonation>(programDTO);
             var categoryId = unitOfWork.CategoryRepository.GetByWhereAsync(x => x.Name == programDTO.CategoryName).FirstOrDefault();
             var orgazitionId = unitOfWork.OrganazationFundraise.GetByWhereAsync(x => x.Name == programDTO.OrganizationName).FirstOrDefault();
+            program.DateStart = DateTime.Now;
             program.CategoryId = categoryId.CategoryId;
             program.OrganizationFundraiseId = orgazitionId.OrganizationFundraiseId;
             program.TotalDonate = 0;
-            program.Status = "Đang quyên góp";
+            program.Status = "Mới tạo";
             var newProgram = await unitOfWork.ProgramDonation.CreateAsync(program);
 
             if (newProgram == null)
@@ -147,6 +148,21 @@ namespace ProjectMomoDonation.API.Controllers
             program.CategoryId = categoryId.CategoryId;
             program.OrganizationFundraiseId = orgazitionId.OrganizationFundraiseId;
             program.Status = "Vừa cập nhật";
+
+            var update = await unitOfWork.ProgramDonation.UpdateAsync(program);
+
+            if (update == null)
+                return NotFound();
+            return Ok(mapper.Map<ProgramCreateDTO>(update));
+        }
+
+        [HttpPut]
+        [Route("UpdateStatus/{id}")]
+        public async Task<IActionResult> UpdateStatus(int id, string status)
+        {
+            var program = unitOfWork.ProgramDonation.GetByWhereAsync(x => x.Id == id).FirstOrDefault();
+
+            program.Status = status;
 
             var update = await unitOfWork.ProgramDonation.UpdateAsync(program);
 

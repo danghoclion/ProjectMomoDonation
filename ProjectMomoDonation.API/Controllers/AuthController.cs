@@ -105,7 +105,7 @@ namespace ProjectMomoDonation.API.Controllers
         {
             var user = userManager.Users.Where(u => u.Email == email).FirstOrDefault();
             if (user == null) { return BadRequest(); }
-            string newPassword = "123abc";
+            string newPassword = Guid.NewGuid().ToString().Replace('-','a');
             string newHashPassword = userManager.PasswordHasher.HashPassword(user, newPassword);
             user.PasswordHash = newHashPassword;
             var updateResult = await userManager.UpdateAsync(user);

@@ -34,7 +34,7 @@ namespace ProjectMomoDoanation.Core.Repository
 
         public async Task<List<TEntity>> GetAllAsync(string? includes = null)
         {
-            if(includes != null)
+            if (includes != null)
                 return await entities.Include(includes).ToListAsync();
             else
                 return await entities.ToListAsync();
@@ -54,8 +54,8 @@ namespace ProjectMomoDoanation.Core.Repository
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            //context.Set<TEntity>().Update(entity);
-            this.context.Entry(entity).State = EntityState.Modified;
+            context.Set<TEntity>().Update(entity);
+            //this.context.Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();
             return entity;
         }

@@ -27,12 +27,17 @@ namespace ProjectMomoDonation.Core.Helper
             var programs = await unitOfWork.ProgramDonation.GetAllAsync();
             foreach (var program in programs)
             {
-                var time = program.DateEnd - program.DateStart;
+                var timeLeft = program.DateEnd - DateTime.Now;
+                var isEnoughAmount = (program.TotalDonate - program.DonationGoal) > 0;
 
-                if (program.DateEnd == DateTime.Now)
-                    program.Status = StatusProgram.End;
-                if (time.Days > 0)
+                if ((timeLeft.TotalMinutes < 0 && program.Status != StatusProgram.End) || isEnoughAmount)
+                {
+                    { program.Status = StatusProgram.Inactive; }
+                }
+                if (timeLeft.TotalMinutes > 0 && program.Status != StatusProgram.New && !isEnoughAmount)
+                {
                     program.Status = StatusProgram.Active;
+                }
             }
             unitOfWork.SaveChange();
         }
@@ -40,8 +45,9 @@ namespace ProjectMomoDonation.Core.Helper
 
     public static class StatusProgram
     {
+        public const string New = "Mới tạo";
         public const string Active = "Đang quyên góp";
-        public const string End = "Kết thúc quyên góp";
-        public const string Inactive = "Đóng quyên góp";
+        public const string Inactive = "Kết thúc quyên góp";
+        public const string End = "Đóng quyên góp";
     }
 }

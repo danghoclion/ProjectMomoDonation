@@ -21,8 +21,8 @@ namespace FA.JustBlog.UnitTest.Repositories
             _dbSet = new Mock<DbSet<DonateHistory>>();
             var data = new List<DonateHistory>()
             {
-                new DonateHistory() { HistoryID = 1,ProgramDonationId= 1, Id = "1", Amount = 1000, Time = DateTime.Now},
-                new DonateHistory() { HistoryID = 2,ProgramDonationId =2 ,Id = "2", Amount = 2000, Time = DateTime.Now},
+                new DonateHistory() { HistoryID = 1,ProgramDonationId = 1, Id = "1", Amount = 1000, Time = DateTime.Now},
+                new DonateHistory() { HistoryID = 2,ProgramDonationId = 2 ,Id = "2", Amount = 2000, Time = DateTime.Now},
                 new DonateHistory() { HistoryID = 3,ProgramDonationId = 3,  Id = "3", Amount = 3000, Time = DateTime.Now},
             }.AsQueryable();
             _dbSet.As<IQueryable<DonateHistory>>().Setup(m => m.Provider).Returns(data.Provider);

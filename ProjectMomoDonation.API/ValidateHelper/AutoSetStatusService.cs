@@ -8,7 +8,7 @@ namespace ProjectMomoDonation.API.ValidateHelper
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             UnitOfWork unitOfWork = new UnitOfWork();
-            var refreshTime = 1000000;
+            var refreshTime = 6000;
             while (!stoppingToken.IsCancellationRequested)
             {
                 Helper.SetStatusProgram(unitOfWork);
@@ -16,6 +16,5 @@ namespace ProjectMomoDonation.API.ValidateHelper
             }
             unitOfWork.SaveChange();
         }
-
     }
 }
