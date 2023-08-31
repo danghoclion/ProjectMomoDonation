@@ -1,0 +1,31 @@
+<app-main-navigation-bar></app-main-navigation-bar>
+<body class="page-donation">
+  <ng-container *ngIf="DonationProgram">
+    <app-dp-banner [donationProgram]="DonationProgram"></app-dp-banner>
+  </ng-container>
+  <div
+    class="fixed -top-px z-10 w-screen max-w-full border-b bg-white transition duration-200 md:sticky md:z-20 opacity-100 border-gray-200"
+  >
+    <div class="mx-auto w-full max-w-6xl md:px-8 lg:px-8 px-0">
+      <div class="jsx-2996589590 soju-carousel relative"></div>
+    </div>
+  </div>
+  <div class="mx-auto w-full max-w-6xl px-5 md:px-8 lg:px-8">
+    <div class="mx-auto mt-5 w-full lg:mt-0">
+      <div class="grid grid-cols-12 gap-5 md:gap-x-10 md:gap-y-7">
+        <div class="col-span-12 md:col-span-6 lg:col-span-8">
+          <ng-container *ngIf="DonationProgram">
+            <app-dp-story [donationProgram]="DonationProgram"></app-dp-story>
+          </ng-container>
+          <ng-container>
+            <h2>Danh Sách Nhà Hảo Tâm</h2>
+            <app-dp-donator-list [urlSlug]="urlSlug"></app-dp-donator-list>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+

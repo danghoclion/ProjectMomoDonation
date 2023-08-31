@@ -1,0 +1,48 @@
+<div
+  class="py-8 md:py-10 lg:py-14 landing:bg-transparent bg-white"
+  style="--grad-rgb-color: 255 255 255"
+>
+  <div
+    class="mx-auto w-full max-w-6xl px-5 md:px-8 lg:px-8 landing-fadeUp-child"
+  >
+    <div class="mb-5 text-center md:mb-8" id="section-brand">
+      <h2
+        class="text-2xl font-bold landing:text-lpTitle lg:text-3xl text-pink-600"
+      >
+        Các đối tác đồng hành
+      </h2>
+      <h3
+        class="mx-auto mt-2 max-w-3xl text-md text-gray-500 landing:text-lpText/90 lg:text-lg"
+      >
+        Các tổ chức nhân đạo Phi Lợi Nhuận đồng hành cùng Ví MoMo giúp đỡ các
+        hoàn cảnh khó khăn trên khắp cả nước.
+      </h3>
+    </div>
+  </div>
+</div>
+<div class="flex">
+  <div style="width: 20%"></div>
+  <ng-container *ngIf="allOrganizationFundraise">
+    <div style="width: 60%">
+      <swiper-container
+        #swiper
+        [slidesPerView]="3"
+        [initialSlide]="1"
+        [pagination]="{ clickable: true, dynamicBullets: true }"
+        [spaceBetween]="50"
+        [autoplay]="true"
+        autoplay-delay="5000"
+        autoplay-disable-on-interaction="false"
+        [breakpoints]="breakpoints"
+      >
+        <swiper-slide
+          *ngFor="let OrganizationFundraise of allOrganizationFundraise"
+          ><app-main-organization-fundraise-item
+            [OrganizationFundraise]="OrganizationFundraise"
+          ></app-main-organization-fundraise-item>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+  </ng-container>
+  <div style="width: 20%"></div>
+</div>

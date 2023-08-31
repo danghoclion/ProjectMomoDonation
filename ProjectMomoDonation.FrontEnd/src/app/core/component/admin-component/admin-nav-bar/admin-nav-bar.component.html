@@ -1,0 +1,185 @@
+<nav
+  class="momo-navigation-bar-mobile mobile-menu header-mobile z-60 sticky top-0 left-0 right-0 border-b border-gray-200 bg-white bg-opacity-95 backdrop-blur-sm lg:hidden"
+>
+  <div
+    class="momo-navigation-bar-mobile relative z-20 flex items-center pl-4 pr-1"
+  >
+    <div
+      class="momo-navigation-bar-mobile flex flex-none items-center justify-center space-x-2"
+    >
+      <a
+        target=""
+        class="momo-navigation-bar-mobile nav-s-logo-second relative flex items-center space-x-2 pl-1 after:absolute after:left-0 after:h-7 after:w-[1px] after:bg-gray-300 after:content-[&#x27;&#x27;]"
+      >
+        <img
+          style="max-height: 30px"
+          src="https://homepage.momocdn.net/img/momo-upload-api-220610101417-637904528573119192.png"
+          class="momo-navigation-bar-mobile block"
+        />
+        <div class="momo-navigation-bar-mobile">
+          <span
+            class="momo-navigation-bar-mobile block text-xs font-semibold leading-[1.1] text-momo"
+            >Admin Page</span
+          >
+        </div>
+      </a>
+    </div>
+    <div
+      class="momo-navigation-bar-mobile flex flex-1 justify-end pl-4 pr-1"
+    ></div>
+    <!-- Mobile Menu Button -->
+    <div
+      class="momo-navigation-bar-mobile mobile-menu__button flex h-11 w-12 cursor-pointer items-center justify-center"
+      (click)="toggleMobileMenu()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        class="momo-navigation-bar-mobile h-7 w-7"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+          class="momo-navigation-bar-mobile"
+        ></path>
+      </svg>
+    </div>
+
+    <!-- Mobile Menu Items -->
+    <ul
+      class="momo-navigation-bar-mobile mobile-menu__items absolute top-0 right-0 bg-white w-full mt-14 py-3 px-4 border border-gray-300 rounded-md shadow-lg"
+      [ngClass]="{ hidden: !mobileMenuOpen }"
+    >
+      <li class="momo-navigation-bar-mobile mb-2">
+        <a
+          class="momo-navigation-bar-mobile w-full text-center text-gray-600 hover:text-gray-900"
+          routerLink="/admin/user"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Quản Lý Người Dùng</a
+        >
+      </li>
+      <li class="momo-navigation-bar-mobile mb-2">
+        <a
+          class="momo-navigation-bar-mobile w-full text-center text-gray-600 hover:text-gray-900"
+          routerLink="/admin/organization"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Quản Lý Quỹ Từ Thiện</a
+        >
+      </li>
+      <li class="momo-navigation-bar-mobile">
+        <a
+          class="momo-navigation-bar-mobile w-full text-center text-gray-600 hover:text-gray-900"
+          routerLink="/admin/program"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          Quản Lý Dự Án Từ Thiện
+        </a>
+      </li>
+      <ng-container>
+        <li class="momo-navigation-bar-mobile">
+          <a
+            class="momo-navigation-bar-mobile w-full text-center text-gray-600 hover:text-gray-900"
+            (click)="onLogout()"
+          >
+            Đăng Xuất
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</nav>
+<nav
+  class="momo-navigation-bar-desktop header-desktop py-2 sticky top-0 z-40 hidden border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur transition-transform lg:block"
+>
+  <div
+    class="momo-navigation-bar-desktop mx-auto flex w-full max-w-6xl items-center justify-between px-6 text-md lg:px-8"
+  >
+    <div
+      class="momo-navigation-bar-desktop flex flex-none items-center space-x-3"
+    >
+      <a
+        href="https://momo.vn/"
+        aria-label="MoMo"
+        class="momo-navigation-bar-desktop nav-s-logo block transition-opacity hover:opacity-90"
+      >
+        <img
+          alt=""
+          style="max-height: 38px"
+          src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-MoMo-Square.png"
+          class="momo-navigation-bar-desktop block"
+        />
+      </a>
+      <a
+        target=""
+        class="momo-navigation-bar-desktop nav-s-logo-second relative flex items-center space-x-1.5 pl-2 after:absolute after:left-0 after:h-8 after:w-[1px] after:bg-gray-300 after:content-[&#x27;&#x27;] hover:opacity-80"
+      >
+        <img
+          alt=""
+          style="max-height: 38px"
+          src="https://homepage.momocdn.net/img/momo-upload-api-220610101417-637904528573119192.png"
+          class="momo-navigation-bar-desktop block"
+        />
+        <div class="momo-navigation-bar-desktop">
+          <span
+            class="momo-navigation-bar-desktop block text-sm font-semibold leading-[1.1] text-momo"
+            >Admin Page</span
+          >
+        </div>
+      </a>
+    </div>
+    <div class="momo-navigation-bar-desktop relative flex-1 px-3">
+      <nav
+        class="momo-navigation-bar-desktop flex flex-row flex-nowrap justify-start"
+      >
+        <div class="momo-navigation-bar-desktop menu relative">
+          <a
+            class="block cursor-pointer whitespace-nowrap px-2 py-2 font-bold transition-all text-gray-600 hover:text-pink-600"
+            routerLink="/admin/organization"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            >Quản Lý Quỹ Từ Thiện</a
+          >
+        </div>
+        <div class="momo-navigation-bar-desktop menu relative">
+          <a
+            class="block cursor-pointer whitespace-nowrap px-2 py-2 font-bold transition-all text-gray-600 hover:text-pink-600"
+            routerLink="/admin/program"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+          >
+            Quản Lý Dự Án Từ Thiện
+          </a>
+        </div>
+        <div class="momo-navigation-bar-desktop menu relative">
+          <a
+            class="block cursor-pointer whitespace-nowrap px-2 py-2 font-bold transition-all text-gray-600 hover:text-pink-600"
+            routerLink="/admin/user"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            >Quản Lý Người Dùng</a
+          >
+        </div>
+        <div
+          class="momo-navigation-bar-desktop flex flex-1 justify-end pl-4 pr-1"
+        ></div>
+        <ng-container>
+          <div class="momo-navigation-bar-desktop menu relative">
+            <a
+              class="block cursor-pointer whitespace-nowrap px-2 py-2 font-bold transition-all text-gray-600 hover:text-pink-600"
+              (click)="onLogout()"
+            >
+              Đăng Xuất
+            </a>
+          </div>
+        </ng-container>
+      </nav>
+    </div>
+  </div>
+</nav>

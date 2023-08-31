@@ -1,0 +1,167 @@
+<app-admin-nav-bar></app-admin-nav-bar>
+<div class="container">
+  <div class="row">
+    <h2>Thêm Mới Quỹ Từ Thiện</h2>
+    <ng-container *ngIf="model">
+      <form #form="ngForm" (ngSubmit)="onModelUpdating()">
+        <label class="form-label" for="username">Tên Dự Án</label>
+
+        <div class="form-outline mb-4">
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            placeholder="Nhập tên dự án"
+            [(ngModel)]="model.title"
+            name="title"
+          />
+        </div>
+        <label class="form-label" for="form2Example22">URL Slug</label>
+        <div class="form-outline mb-4">
+          <input
+            type="text"
+            id="urlSlug"
+            class="form-control"
+            placeholder="Nhập URL Slug"
+            [(ngModel)]="model.urlSlug"
+            name="urlSlug"
+          />
+        </div>
+        <label class="form-label" for="repassword">Tên Ngắn Gọn</label>
+        <div class="form-outline mb-4">
+          <input
+            type="text"
+            id="shortTitle"
+            class="form-control"
+            placeholder="Nhập tên ngắn gọn"
+            [(ngModel)]="model.shortTitle"
+            name="shortTitle"
+          />
+        </div>
+        <label class="form-label" for="repassword">Avatar</label>
+        <div class="form-outline mb-4">
+          <input
+            type="text"
+            id="avatar"
+            class="form-control"
+            placeholder="Nhập đường dẫn tới avatar"
+            [(ngModel)]="model.avatarUrl"
+            name="avatar"
+          />
+        </div>
+
+        <div class="row">
+          <div class="col-3 border pb-2">
+            <h3>Xem Trước Avatar</h3>
+            <img src="{{ model.avatarUrl }}" />
+          </div>
+        </div>
+        <label class="form-label" for="story">Câu Chuyện</label>
+        <ng-container *ngIf="story">
+          <ckeditor
+            [editor]="Editor"
+            [data]="story"
+            (change)="onChange($event)"
+          ></ckeditor>
+        </ng-container>
+
+        <div class="form-outline mb-4">
+          <input
+            type="date"
+            id="urlSlug"
+            class="form-control"
+            placeholder="Chọn Ngày Bắt Đầu"
+            [(ngModel)]="model.dateStart"
+            name="dateStart"
+            hidden
+          />
+        </div>
+        <label class="form-label" for="urlSlug">Ngày Kết Thúc</label>
+        <div class="form-outline mb-4">
+          <mat-form-field>
+            <mat-label>Chọn ngày kết thúc</mat-label>
+            <input
+              name="dateEnd"
+              matInput
+              [matDatepicker]="picker"
+              [(ngModel)]="model.dateEnd"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="form-outline mb-4">
+          <input
+            type="number"
+            id="urlSlug"
+            class="form-control"
+            placeholder="Số Tiền Đạt Được"
+            [(ngModel)]="model.totalDonate"
+            name="totalDonate"
+            hidden
+          />
+        </div>
+        <label class="form-label" for="urlSlug">Số Tiền Mục Tiêu</label>
+        <div class="form-outline mb-4">
+          <input
+            type="number"
+            id="urlSlug"
+            class="form-control"
+            placeholder="Số Tiền Mục Tiêu"
+            [(ngModel)]="model.donationGoal"
+            name="donationGoal"
+          />
+        </div>
+        <label class="form-label" for="urlSlug">Danh Mục Quyên Góp</label>
+        <div class="form-outline mb-4">
+          <!-- Display mat-select for category selection -->
+          <mat-form-field>
+            <mat-select [(ngModel)]="model.categoryName" name="categoryName">
+              <mat-option
+                *ngFor="let category of categoryListName"
+                [value]="category"
+              >
+                {{ category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <label class="form-label" for="urlSlug">Tên Quỹ Từ Thiện</label>
+        <div class="form-outline mb-4">
+          <!-- Display mat-select for organization selection -->
+          <mat-form-field>
+            <mat-select
+              [(ngModel)]="model.organizationName"
+              name="organizationName"
+            >
+              <mat-option
+                *ngFor="let organization of organizationListName"
+                [value]="organization"
+              >
+                {{ organization }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="text-center row pt-1 mb-2 pb-1">
+          <button class="btn col-12" type="submit">Cập Nhật</button>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center pb-4">
+          <a
+            class="text-red-600"
+            routerLink="/admin/program"
+            routerLinkActive="active"
+            >Quay về Danh sách</a
+          >
+        </div>
+      </form>
+    </ng-container>
+  </div>
+</div>

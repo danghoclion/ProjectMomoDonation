@@ -1,0 +1,67 @@
+<app-admin-nav-bar></app-admin-nav-bar>
+<div class="mt-12">
+  <button class="btn col-12">
+  <a routerLink="/admin/organization/create"
+  routerLinkActive="active" >Thêm Mới
+</a>
+</button>
+</div>
+<mat-sidenav-container fxFlex="0 1 auto">
+  <mat-sidenav #sidenav position="start" mode="side" opened="false" class="width-30 p-6">
+      SIDENAV CONTENT HERE
+  </mat-sidenav>
+  <mat-sidenav-content>
+<div class="mat-elevation-z8">
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="example-table">
+
+      <ng-container matColumnDef="OrganizationFundraiseId">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let row">{{ row.organizationFundraiseId }}</td>
+      </ng-container>
+      <ng-container matColumnDef="urlSlug">
+        <th mat-header-cell *matHeaderCellDef>URL Slug</th>
+        <td mat-cell *matCellDef="let row">{{ row.urlSlug }}</td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Tên Quỹ Từ Thiện</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="shortName">
+        <th mat-header-cell *matHeaderCellDef>Tên Ngắn Gọn</th>
+        <td mat-cell *matCellDef="let row">{{ row.shortName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Mô Tả</th>
+        <td mat-cell *matCellDef="let row">{{ row.description}}</td>
+      </ng-container>
+      <ng-container matColumnDef="avatar">
+        <th mat-header-cell *matHeaderCellDef>Hình Đại Diện</th>
+        <td mat-cell *matCellDef="let row"><img [src]="row.avatar" style="height: 100px;"></td>
+      </ng-container>
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>Ảnh Dự Án</th>
+        <td mat-cell *matCellDef="let row"><img [src]="row.image" style="height: 100px;"></td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Thao tác</th>
+        <td mat-cell *matCellDef="let row">
+          <div><a [routerLink]="['/admin/organization/update',row.organizationFundraiseId]">Sửa nội dung</a></div>
+          <div><button (click)="OnDelete(row.organizationFundraiseId)">Xoá</button></div>
+
+        </td>
+      </ng-container>
+
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

@@ -1,0 +1,26 @@
+.sl-item.main-banner-information {
+  position: relative;
+}
+
+.sl-item.main-banner-information:before {
+  content: "";
+  height: 18px;
+  width: 2px;
+  background-color: #f45197;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 4px;
+}
+.btn-primary-landing {
+  font-weight: bolder;
+  color: white;
+  background-color: #f45197;
+  border: #f45197;
+}
+.btn-primary-outline {
+  font-weight: bolder;
+  color: #f45197;
+  background-color: white;
+  border: 1px solid #f45197;
+}

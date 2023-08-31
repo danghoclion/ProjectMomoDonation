@@ -1,0 +1,126 @@
+<div class="main-banner relative -mb-3 max-w-full sm:-mb-4 md:-mb-6 lg:-mb-7">
+  <div class="relative aspect-[5/6] overflow-hidden sm:aspect-[96/37]">
+    <a target="_self" href="https://momo.vn/cong-dong/katinat">
+      <picture>
+        <source
+          media="(max-width: 639px)"
+          srcSet="https://homepage.momocdn.net/img/momo-upload-api-230608145334-638218328147954662.jpg"
+        />
+        <img
+          src="https://homepage.momocdn.net/img/momo-upload-api-230608145332-638218328129546470.jpg"
+          loading="lazy"
+          class="absolute inset-0 w-full"
+          alt="Katinat"
+        />
+      </picture>
+    </a>
+  </div>
+</div>
+<div
+  class="py-8 md:py-10 lg:py-14 landing:bg-transparent bg-pink-50"
+  style="--grad-rgb-color: 253 242 248"
+>
+  <div class="mx-auto w-full max-w-6xl px-5 md:px-8 lg:px-8">
+    <div
+      class="main-banner-information grid grid-cols-1 items-center md:grid-cols-2 md:gap-6"
+    >
+      <div
+        class="main-banner-information order-2 min-w-300 sm:order-1 sm:col-start-1"
+      >
+        <div class="main-banner-information text-left">
+          <h1
+            class="main-banner-information service-page-title mb-2 text-2xl font-bold text-pink-600 md:mb-6 md:text-3xl lg:text-4xl"
+          >
+            Nền tảng quyên góp từ thiện Trái tim MoMo
+          </h1>
+          <p
+            class="main-banner-information service-page-description text-lg font-light text-gray-600"
+          >
+            Trái Tim MoMo là nền tảng giúp bạn dễ dàng chung tay quyên góp tiền
+            cùng hàng triệu người, giúp đỡ các hoàn cảnh khó khăn trên khắp cả
+            nước.
+          </p>
+        </div>
+        <div
+          class="main-banner-information font-bold mt-3 grid gap-2 lg:grid-cols-4 grid-cols-3"
+        >
+          <ng-container *ngIf="statisticInformation">
+            <div class="main-banner-information sl-item pl-3">
+              <h4
+                class="main-banner-information pb-1 pl-0 text-lg font-bold text-gray-700"
+              >
+                {{ statisticInformation.totalProgram }}
+              </h4>
+              <p
+                class="main-banner-information text-sm leading-4 text-gray-500"
+              >
+                dự án đã được gây quỹ
+              </p>
+            </div>
+            <div class="main-banner-information sl-item pl-3">
+              <h4
+                class="main-banner-information pb-1 pl-0 text-lg font-bold text-gray-700"
+              >
+                {{ statisticInformation.totalFundraise / 1000000
+                }}<span class="main-banner-information">+ triệu</span>
+              </h4>
+              <p
+                class="main-banner-information text-sm leading-4 text-gray-500"
+              >
+                đồng được quyên góp
+              </p>
+            </div>
+            <div class="main-banner-information sl-item pl-3">
+              <h4
+                class="main-banner-information pb-1 pl-0 text-lg font-bold text-gray-700"
+              >
+                {{ statisticInformation.totalDonationCount
+                }}<span class="main-banner-information"></span>
+              </h4>
+              <p
+                class="main-banner-information text-sm leading-4 text-gray-500"
+              >
+                lượt quyên góp
+              </p>
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="main-banner-information mt-7">
+          <div
+            class="main-banner-information space-x-3 text-center md:text-left"
+          >
+            <a class="cursor-pointer" rel="noreferrer">
+              <span class="btn btn-primary btn-primary-landing">Quyên góp</span>
+            </a>
+            <a class="cursor-pointer" rel="noreferrer">
+              <span class="btn btn-primary-outline">Giới thiệu</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="main-banner-information order-1 sm:order-2 sm:col-start-2">
+        <div
+          class="main-banner-information aspect-w-5 aspect-h-4 relative md:block"
+        >
+          <span>
+            <img
+              alt="Nền tảng quyên góp từ thiện Trái tim MoMo"
+              src="https://homepage.momocdn.net/images/momo-upload-api-210118152714-637465804342708477.png"
+              loading="lazy"
+              style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 80%;
+                object-fit: contain;
+              "
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div>
+  <div>
+    <h1 class="text-momo mb-3 text-2xl font-bold">Các đối tác đồng hành</h1>
+  </div>
+</div>
+
+<swiper-container
+  [slidesPerView]="3"
+  [initialSlide]="1"
+  [pagination]="{ clickable: true, dynamicBullets: true }"
+  [spaceBetween]="50"
+  navigation="true"
+  [breakpoints]="breakpoints"
+>
+  <ng-container
+    *ngFor="
+      let OrganizationFundraise of allOrganizationFundraise;
+      index as i;
+      count as count
+    "
+  >
+    <ng-container *ngIf="i * 3 + 2 < count">
+      <swiper-slide
+        ><app-main-organization-fundraise-item
+          [OrganizationFundraise]="allOrganizationFundraise[i * 3]"
+        ></app-main-organization-fundraise-item>
+        <app-main-organization-fundraise-item
+          [OrganizationFundraise]="allOrganizationFundraise[i * 3 + 1]"
+        ></app-main-organization-fundraise-item>
+        <app-main-organization-fundraise-item
+          [OrganizationFundraise]="allOrganizationFundraise[i * 3 + 2]"
+        ></app-main-organization-fundraise-item>
+      </swiper-slide>
+    </ng-container>
+    <ng-container *ngIf="i * 3 + 1 === count - 1">
+      <swiper-slide
+        ><app-main-organization-fundraise-item
+          [OrganizationFundraise]="allOrganizationFundraise[i * 3]"
+        ></app-main-organization-fundraise-item>
+        <app-main-organization-fundraise-item
+          [OrganizationFundraise]="allOrganizationFundraise[i * 3 + 1]"
+        ></app-main-organization-fundraise-item>
+      </swiper-slide>
+    </ng-container>
+    <ng-container *ngIf="i * 3 === count - 1">
+      <swiper-slide
+        ><app-main-organization-fundraise-item
+          [OrganizationFundraise]="allOrganizationFundraise[i * 3]"
+        ></app-main-organization-fundraise-item>
+      </swiper-slide>
+    </ng-container>
+  </ng-container>
+</swiper-container>

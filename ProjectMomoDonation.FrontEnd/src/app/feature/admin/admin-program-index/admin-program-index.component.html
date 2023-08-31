@@ -1,0 +1,198 @@
+<app-admin-nav-bar></app-admin-nav-bar>
+
+<div class="mt-1 container">
+  <button class="btn col-12">
+    <a routerLink="/admin/program/create" routerLinkActive="active"
+      >Thêm Mới
+    </a>
+  </button>
+</div>
+<div class="mt-6 container justify-center">
+  <div class="col-4">
+    <input
+      class="border col-8"
+      type="text"
+      [(ngModel)]="titleSearch"
+      id="titleSearch"
+      placeholder="Tìm kiếm theo tiêu đề"
+      name="titleSearch"
+      style="height: 70%; font-size: larger"
+      (input)="DataFiltering()"
+    />
+  </div>
+
+  <mat-form-field class="col-3">
+    <mat-select
+      [(ngModel)]="statusSearch"
+      name="statusSearch"
+      placeholder="Tìm theo trạng thái"
+    >
+      <mat-option value='' (click)="DataFiltering()">
+        Tất cả trạng thái</mat-option
+      >
+      <mat-option value="Mới tạo" (click)="DataFiltering()">Mới tạo</mat-option>
+      <mat-option value="Đang quyên góp" (click)="DataFiltering()"
+        >Đang quyên góp</mat-option
+      >
+      <mat-option value="Kết thúc quyên góp" (click)="DataFiltering()"
+        >Kết thúc quyên góp</mat-option
+      >
+      <mat-option value="Đóng quyên góp" (click)="DataFiltering()"
+        >Đóng quyên góp</mat-option
+      >
+      <mat-option (click)="DataFiltering()"> </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="col-3">
+    <mat-select
+      [(ngModel)]="organizationSearch"
+      name="organizationName"
+      placeholder="Tìm theo tên quỹ từ thiện"
+    >
+    <mat-option value='' (click)="DataFiltering()">
+      Tất cả quỹ từ thiện</mat-option>
+      <mat-option
+        *ngFor="let organization of organizationListName"
+        [value]="organization"
+        (click)="DataFiltering()"
+      >
+        {{ organization }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="example-table">
+      <ng-container matColumnDef="id" sticky>
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+      </ng-container>
+      <ng-container matColumnDef="title" sticky>
+        <th mat-header-cell *matHeaderCellDef>Tiêu Đề</th>
+        <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+      </ng-container>
+      <ng-container matColumnDef="avatarUrl">
+        <th mat-header-cell *matHeaderCellDef>Ảnh Đại Diện Chương Trình</th>
+        <td mat-cell *matCellDef="let row">
+          <img [src]="row.avatarUrl" style="height: 100px" />
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="urlSlug">
+        <th mat-header-cell *matHeaderCellDef>URL Slug</th>
+        <td mat-cell *matCellDef="let row">{{ row.urlSlug }}</td>
+      </ng-container>
+      <ng-container matColumnDef="shortTitle" sticky>
+        <th mat-header-cell *matHeaderCellDef>Tiêu Đề Ngắn</th>
+        <td mat-cell *matCellDef="let row">{{ row.shortTitle }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="story">
+        <th mat-header-cell *matHeaderCellDef>Câu Chuyện</th>
+        <td mat-cell *matCellDef="let row">{{ row.story }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateStart">
+        <th mat-header-cell *matHeaderCellDef>Ngày Bắt Đầu</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.dateStart | date : "HH:mm:ss dd-MM-yyyy" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateEnd">
+        <th mat-header-cell *matHeaderCellDef>Ngày Kết Thúc</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.dateEnd | date : "HH:mm:ss dd-MM-yyyy" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalDonate">
+        <th mat-header-cell *matHeaderCellDef>Số Tiền Đạt Được</th>
+        <td mat-cell *matCellDef="let row">{{ row.totalDonate }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="donationGoal">
+        <th mat-header-cell *matHeaderCellDef>Số Tiền Mục Tiêu</th>
+        <td mat-cell *matCellDef="let row">{{ row.donationGoal }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Trạng Thái</th>
+        <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="categoryName">
+        <th mat-header-cell *matHeaderCellDef>Loại Hình Từ Thiện</th>
+        <td mat-cell *matCellDef="let row">{{ row.categoryName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="organizationName">
+        <th mat-header-cell *matHeaderCellDef>Tổ Chức Gây Quỹ</th>
+        <td mat-cell *matCellDef="let row">{{ row.organizationName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="countDonation">
+        <th mat-header-cell *matHeaderCellDef>Lượt Quyên Góp</th>
+        <td mat-cell *matCellDef="let row">{{ row.countDonation }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Thực hiện thao tác</th>
+        <td mat-cell *matCellDef="let row">
+          <div *ngIf="row.status == 'Mới tạo'">
+            <button
+              class="underline"
+              (click)="OnChangeStatus(row.id, 'Đang quyên góp')"
+            >
+              Bắt đầu
+            </button>
+          </div>
+          <div
+            *ngIf="
+              row.status !== 'Đóng quyên góp' &&
+              row.status !== 'Kết thúc quyên góp'
+            "
+          >
+            <a
+              class="underline"
+              [routerLink]="['/admin/program/update', row.id]"
+              >Sửa</a
+            >
+          </div>
+
+          <div *ngIf="row.status == 'Mới tạo'">
+            <button class="underline" (click)="OnDelete(row.id)">Xoá</button>
+          </div>
+
+          <div *ngIf="row.status == 'Kết thúc quyên góp'">
+            <a
+              class="underline"
+              [routerLink]="['/admin/program/update', row.id]"
+              >Tiếp tục</a
+            >
+          </div>
+
+          <div *ngIf="row.status == 'Kết thúc quyên góp'">
+            <button
+              class="underline"
+              (click)="OnChangeStatus(row.id, 'Đóng quyên góp')"
+            >
+              Đóng
+            </button>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <div>
+      <mat-paginator
+        #paginator
+        [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</div>
